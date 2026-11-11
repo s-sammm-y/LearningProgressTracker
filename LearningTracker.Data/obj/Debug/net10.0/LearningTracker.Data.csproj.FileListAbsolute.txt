@@ -15,3 +15,4 @@
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Data/obj/Debug/net10.0/ref/LearningTracker.Data.dll
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Data/bin/Debug/net10.0/LearningTracker.Data.runtimeconfig.json
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Data/obj/Debug/net10.0/LearningTracker.Data.genruntimeconfig.cache
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Data/obj/Debug/net10.0/LearningTracker.Data.sourcelink.json

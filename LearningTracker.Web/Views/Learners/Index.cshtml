@@ -39,6 +39,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Cohort</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
@@ -49,6 +50,14 @@
                                 <td>@learner.DisplayName</td>
                                 <td>@learner.Account.NormalizedEmail</td>
                                 <td>@learner.Cohort</td>
+                                <td>
+                                    <a asp-controller="Learners"
+                                    asp-action="Details"
+                                    asp-route-id="@learner.Id"
+                                    class="btn btn-outline-primary btn-sm">
+                                        View Details
+                                    </a>
+                                </td>
                             </tr>
                         }
                     </tbody>

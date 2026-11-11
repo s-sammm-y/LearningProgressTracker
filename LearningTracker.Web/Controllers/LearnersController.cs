@@ -9,10 +9,14 @@ namespace LearningTracker.Web.Controllers;
 public class LearnersController : Controller
 {
     private readonly ILearnerService _learnerService;
+    private readonly IAssignmentService _assignmentService;
 
-    public LearnersController(ILearnerService learnerService)
+    public LearnersController(
+        ILearnerService learnerService,
+        IAssignmentService assignmentService)
     {
         _learnerService = learnerService;
+        _assignmentService = assignmentService;
     }
 
     [HttpGet]
@@ -73,5 +77,52 @@ public class LearnersController : Controller
             cancellationToken);
 
         return View(learners);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        var learner = await _learnerService.GetLearnerByIdAsync(
+            id,
+            cancellationToken);
+
+        if (learner == null)
+            return NotFound();
+
+        var assignments = await _assignmentService.GetAssignmentsForLearnerAsync(
+            learner.AccountId,
+            cancellationToken);
+
+        var viewModel = new LearnerDetailsViewModel
+        {
+            Learner = learner,
+            Assignments = assignments
+        };
+
+        return View(viewModel);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> ResetPassword(
+        Guid id,
+        CancellationToken cancellationToken)
+    {
+        var temporaryPassword =
+            await _learnerService.ResetTemporaryPasswordAsync(
+                id,
+                cancellationToken);
+
+        if (temporaryPassword == null)
+            return NotFound();
+
+        TempData["ResetTemporaryPassword"] = temporaryPassword;
+
+        TempData["SuccessMessage"] =
+            "Temporary password reset successfully. Share the new credentials privately.";
+
+        return RedirectToAction(nameof(Details), new { id });
     }
 }

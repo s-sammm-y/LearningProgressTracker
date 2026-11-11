@@ -1,0 +1,105 @@
+@using LearningTracker.Models.Enums
+@model List<LearningTracker.Models.Entities.Assignment>
+
+@{
+    ViewData["Title"] = "My Training";
+}
+
+<div class="container mt-4">
+@if (TempData["SuccessMessage"] is string successMessage)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @successMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+    <div class="mb-4">
+        <h2>My Training</h2>
+        <p class="text-muted">
+            View your assigned learning activities and track your progress.
+        </p>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No training assigned yet
+        </div>
+    }
+    else
+    {
+        <div class="card shadow-sm border-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-light">
+                        <tr>
+                            <th>Activity</th>
+                            <th>Topic</th>
+                            <th>Planned Hours</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var assignment in Model)
+                        {
+                            <tr>
+                                <td>@assignment.Activity.Title</td>
+                                <td>@assignment.Activity.Topic</td>
+                                <td>@assignment.Activity.PlannedHours</td>
+                                <td>
+                                    <form asp-controller="MyTraining"
+                                        asp-action="UpdateStatus"
+                                        method="post"
+                                        class="d-flex gap-2">
+
+                                        <input type="hidden"
+                                            name="AssignmentId"
+                                            value="@assignment.Id" />
+
+                                        <select name="Status" class="form-select form-select-sm">
+                                            @if (assignment.Status == AssignmentStatus.NotStarted)
+                                            {
+                                                <option value="0" selected>Not Started</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="0">Not Started</option>
+                                            }
+
+                                            @if (assignment.Status == AssignmentStatus.InProgress)
+                                            {
+                                                <option value="1" selected>In Progress</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="1">In Progress</option>
+                                            }
+
+                                            @if (assignment.Status == AssignmentStatus.Completed)
+                                            {
+                                                <option value="2" selected>Completed</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="2">Completed</option>
+                                            }
+                                        </select>
+
+                                        <button type="submit" class="btn btn-primary btn-sm">
+                                            Save
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    }
+
+</div>

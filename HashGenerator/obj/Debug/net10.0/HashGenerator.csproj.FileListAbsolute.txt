@@ -31,3 +31,4 @@
 /home/ice/Code/Learning-Progress-Tracker/HashGenerator/obj/Debug/net10.0/HashGenerator.pdb
 /home/ice/Code/Learning-Progress-Tracker/HashGenerator/obj/Debug/net10.0/HashGenerator.genruntimeconfig.cache
 /home/ice/Code/Learning-Progress-Tracker/HashGenerator/obj/Debug/net10.0/ref/HashGenerator.dll
+/home/ice/Code/Learning-Progress-Tracker/HashGenerator/obj/Debug/net10.0/HashGenerator.sourcelink.json

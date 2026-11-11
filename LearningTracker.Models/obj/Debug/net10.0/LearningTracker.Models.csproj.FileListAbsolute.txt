@@ -9,3 +9,4 @@
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/refint/LearningTracker.Models.dll
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.pdb
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/ref/LearningTracker.Models.dll
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.sourcelink.json

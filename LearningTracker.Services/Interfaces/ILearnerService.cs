@@ -13,4 +13,12 @@ public interface ILearnerService
 
     Task<List<Learner>> GetAllLearnersAsync(
         CancellationToken cancellationToken = default); 
+
+    Task<Learner?> GetLearnerByIdAsync(
+        Guid learnerId,
+        CancellationToken cancellationToken = default);
+
+    Task<string?> ResetTemporaryPasswordAsync(
+        Guid learnerId,
+        CancellationToken cancellationToken = default);
 }

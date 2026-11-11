@@ -143,4 +143,51 @@ public class LearnerService : ILearnerService
         return await _learnerRepository.GetAllAsync(
             cancellationToken);
     }
+
+    public async Task<Learner?> GetLearnerByIdAsync(
+        Guid learnerId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _learnerRepository.GetByIdAsync(
+            learnerId,
+            cancellationToken);
+    }
+
+    public async Task<string?> ResetTemporaryPasswordAsync(
+        Guid learnerId,
+        CancellationToken cancellationToken = default)
+    {
+        // Find the candidate and their associated account.
+        var learner = await _learnerRepository.GetByIdAsync(
+            learnerId,
+            cancellationToken);
+
+        if (learner == null || learner.Account == null)
+            return null;
+
+        var account = learner.Account;
+
+        // Generate a new temporary password.
+        var temporaryPassword = GenerateTemporaryPassword();
+
+        // Update the account's authentication details.
+        account.PasswordHash = _passwordHasher.HashPassword(
+            account,
+            temporaryPassword);
+
+        account.MustChangePassword = true;
+
+        account.TemporaryPasswordExpiresAt =
+            DateTime.UtcNow.AddHours(24);
+
+        // Invalidate existing login sessions.
+        account.SecurityStamp = Guid.NewGuid().ToString();
+
+        // Save the changes.
+        await _accountRepository.SaveChangesAsync(
+            cancellationToken);
+
+        // Return the temporary password for one-time handover.
+        return temporaryPassword;
+    }
 }

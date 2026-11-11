@@ -194,3 +194,4 @@
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Web/bin/Debug/net10.0/tr/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Web/bin/Debug/net10.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 /home/ice/Code/Learning-Progress-Tracker/LearningTracker.Web/bin/Debug/net10.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Web/obj/Debug/net10.0/LearningTracker.Web.sourcelink.json

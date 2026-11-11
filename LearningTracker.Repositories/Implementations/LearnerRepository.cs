@@ -20,6 +20,7 @@ public class LearnerRepository : ILearnerRepository
         CancellationToken cancellationToken = default)
     {
         return await _context.Learners
+            .Include(l => l.Account)
             .FirstOrDefaultAsync(
                 l => l.Id == id,
                 cancellationToken);

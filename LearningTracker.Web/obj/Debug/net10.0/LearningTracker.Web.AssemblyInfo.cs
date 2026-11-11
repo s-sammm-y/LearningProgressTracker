@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LearningTracker.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af1e7ade649b4247262e59d0d41e2285611034db")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+af2af00ae15562a1b3f25a32cc2f81791e73afe2")]
 [assembly: System.Reflection.AssemblyProductAttribute("LearningTracker.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LearningTracker.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

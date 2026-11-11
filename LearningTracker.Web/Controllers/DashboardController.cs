@@ -30,7 +30,9 @@ public class DashboardController : Controller
                 await _dashboardService.GetTotalAssignmentsAsync(cancellationToken),
 
             CompletedAssignments =
-                await _dashboardService.GetCompletedAssignmentsAsync(cancellationToken)
+                await _dashboardService.GetCompletedAssignmentsAsync(cancellationToken),
+
+            CohortProgress = await _dashboardService.GetCohortProgressAsync()
         };
 
         return View(model);

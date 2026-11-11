@@ -1,4 +1,5 @@
 using System;
+using LearningTracker.Models.DTOs;
 
 namespace LearningTracker.Services.Interfaces;
 
@@ -14,5 +15,8 @@ public interface IDashboardService
         CancellationToken cancellationToken = default);
 
     Task<int> GetCompletedAssignmentsAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<List<CohortProgress>> GetCohortProgressAsync(
         CancellationToken cancellationToken = default);
 }

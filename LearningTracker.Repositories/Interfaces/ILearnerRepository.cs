@@ -23,5 +23,8 @@ public interface ILearnerRepository
         CancellationToken cancellationToken = default);
 
     Task<int> CountAsync(
-    CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default);
+
+    Task<List<Learner>> GetAllWithAssignmentsAsync(
+        CancellationToken cancellationToken = default);
 }

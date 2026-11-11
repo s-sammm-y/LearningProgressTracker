@@ -1,4 +1,6 @@
 
+using LearningTracker.Models.DTOs;
+using LearningTracker.Models.Enums;
 using LearningTracker.Repositories.Interfaces;
 using LearningTracker.Services.Interfaces;
 
@@ -43,5 +45,39 @@ public class DashboardService : IDashboardService
     {
         return await _assignmentRepository.CountCompletedAsync(
             cancellationToken);
+    }
+
+    public async Task<List<CohortProgress>> GetCohortProgressAsync(
+        CancellationToken cancellationToken = default)
+    {
+        var learners = await _learnerRepository
+            .GetAllWithAssignmentsAsync(cancellationToken);
+
+        return learners
+            .GroupBy(l => l.Cohort)
+            .Select(group =>
+            {
+                var totalAssignments = group.Sum(l => l.Assignments.Count);
+
+                var completedAssignments = group.Sum(l =>
+                    l.Assignments.Count(a =>
+                        a.Status == AssignmentStatus.Completed));
+
+                return new CohortProgress
+                {
+                    CohortName = group.Key,
+                    TotalLearners = group.Count(),
+                    TotalAssignments = totalAssignments,
+                    CompletedAssignments = completedAssignments,
+
+                    CompletionPercentage = totalAssignments == 0
+                        ? 0
+                        : Math.Round(
+                            (decimal)completedAssignments / totalAssignments * 100,
+                            2)
+                };
+            })
+            .OrderBy(p => p.CohortName)
+            .ToList();
     }
 }

@@ -63,4 +63,14 @@ public class LearnerRepository : ILearnerRepository
     {
         return await _context.Learners.CountAsync(cancellationToken);
     }
+
+    public async Task<List<Learner>> GetAllWithAssignmentsAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Learners
+            .Include(l => l.Assignments)
+            .OrderBy(l => l.Cohort)
+            .ThenBy(l => l.DisplayName)
+            .ToListAsync(cancellationToken);
+    }
 }

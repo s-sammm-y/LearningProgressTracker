@@ -117,5 +117,59 @@
         </a>
     </div>
 </div>
+<div class="card shadow-sm mt-4">
+    <div class="card-header">
+        <h5 class="mb-0">Cohort Progress</h5>
+    </div>
+
+    <div class="card-body">
+        @if (Model.CohortProgress.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Cohort</th>
+                            <th>Candidates</th>
+                            <th>Total Assignments</th>
+                            <th>Completed</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var cohort in Model.CohortProgress)
+                        {
+                            <tr>
+                                <td>@cohort.CohortName</td>
+                                <td>@cohort.TotalLearners</td>
+                                <td>@cohort.TotalAssignments</td>
+                                <td>@cohort.CompletedAssignments</td>
+                                <td>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar"
+                                             role="progressbar"
+                                             style="width: @cohort.CompletionPercentage%"
+                                             aria-valuenow="@cohort.CompletionPercentage"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100">
+                                            @cohort.CompletionPercentage%
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted mb-0">
+                No cohort progress available yet.
+            </p>
+        }
+    </div>
+</div>
 
 </div>

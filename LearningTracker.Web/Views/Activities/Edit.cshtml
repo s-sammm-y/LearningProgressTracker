@@ -1,0 +1,96 @@
+@model LearningTracker.Web.ViewModels.EditActivityViewModel
+
+@{
+    ViewData["Title"] = "Edit Activity";
+}
+
+<div class="container mt-4">
+
+    <div class="mb-4">
+        <h2>Edit Learning Activity</h2>
+        <p class="text-muted">
+            Update the activity details.
+        </p>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-4">
+
+            <form asp-controller="Activities"
+                  asp-action="Edit"
+                  method="post">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger mb-3">
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label">
+                        Activity Title
+                    </label>
+
+                    <input asp-for="Title"
+                           class="form-control" />
+
+                    <span asp-validation-for="Title"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Topic" class="form-label">
+                        Topic
+                    </label>
+
+                    <input asp-for="Topic"
+                           class="form-control" />
+
+                    <span asp-validation-for="Topic"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="PlannedHours"
+                           class="form-label">
+                        Planned Hours
+                    </label>
+
+                    <input asp-for="PlannedHours"
+                           class="form-control"
+                           type="number"
+                           step="0.01"
+                           min="0.01" />
+
+                    <span asp-validation-for="PlannedHours"
+                          class="text-danger">
+                    </span>
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Save Changes
+                    </button>
+
+                    <a asp-controller="Activities"
+                       asp-action="Index"
+                       class="btn btn-outline-secondary">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

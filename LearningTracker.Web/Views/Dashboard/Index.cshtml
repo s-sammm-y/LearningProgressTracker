@@ -1,0 +1,104 @@
+@model LearningTracker.Web.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Coordinator Dashboard";
+}
+
+<div class="container-fluid mt-4">
+
+    <div class="mb-4">
+        <h2>Coordinator Dashboard</h2>
+        <p class="text-muted">
+            Overview of learning activities and candidate progress.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Learners</h6>
+                    <h2 class="fw-bold">@Model.TotalLearners</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Activities</h6>
+                    <h2 class="fw-bold">@Model.TotalActivities</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Total Assignments</h6>
+                    <h2 class="fw-bold">@Model.TotalAssignments</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h6 class="text-muted">Completed Assignments</h6>
+                    <h2 class="fw-bold text-success">
+                        @Model.CompletedAssignments
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0 mt-4">
+        <div class="card-body">
+            <h5>Welcome, Coordinator!</h5>
+            <p class="text-muted mb-0">
+                Use the dashboard to manage learners, create activities,
+                assign training and monitor progress.
+            </p>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 mt-4">
+    <div class="card-body">
+        <h5 class="mb-3">Candidate Management</h5>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <a asp-controller="Learners"
+               asp-action="Index"
+               class="btn btn-primary">
+                <i class="bi bi-people"></i>
+                View Candidates
+            </a>
+
+            <a asp-controller="Learners"
+               asp-action="Create"
+               class="btn btn-outline-primary">
+                <i class="bi bi-person-plus"></i>
+                Add Candidate
+            </a>
+
+        </div>
+    </div>
+</div>
+<div class="card shadow-sm border-0 mt-4">
+    <div class="card-body">
+        <h5 class="mb-3">Activity Management</h5>
+
+        <a asp-controller="Activities"
+           asp-action="Index"
+           class="btn btn-primary">
+            <i class="bi bi-journal-text"></i>
+            View Activities
+        </a>
+    </div>
+</div>
+
+</div>

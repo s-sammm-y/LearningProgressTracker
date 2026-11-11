@@ -1,0 +1,11 @@
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/bin/Debug/net10.0/LearningTracker.Models.deps.json
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/bin/Debug/net10.0/LearningTracker.Models.dll
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/bin/Debug/net10.0/LearningTracker.Models.pdb
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.GeneratedMSBuildEditorConfig.editorconfig
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.AssemblyInfoInputs.cache
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.AssemblyInfo.cs
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.csproj.CoreCompileInputs.cache
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.dll
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/refint/LearningTracker.Models.dll
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/LearningTracker.Models.pdb
+/home/ice/Code/Learning-Progress-Tracker/LearningTracker.Models/obj/Debug/net10.0/ref/LearningTracker.Models.dll

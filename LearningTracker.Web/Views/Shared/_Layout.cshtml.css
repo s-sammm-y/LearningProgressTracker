@@ -1,48 +1,243 @@
-﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿
+/* ==============================
+   GLOBAL LAYOUT
+============================== */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+html {
+    min-height: 100%;
+    scroll-behavior: smooth;
 }
 
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* ==============================
+   LEARNING TRACKER NAVBAR
+============================== */
+.tracker-navbar > .container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.tracker-navbar .navbar-collapse {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.tracker-navbar .navbar-nav {
+    flex-wrap: nowrap;
+}
+
+.tracker-navbar .nav-item {
+    white-space: nowrap;
+}
+
+.tracker-navbar {
+    background: #ffffff;
+    padding: 14px 0;
+    border-bottom: 1px solid #e8ebe6;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+
+    /* Keep navbar visible while scrolling */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1050;
+}
+
+/* Prevent page content from going behind navbar */
+body {
+    padding-top: 67px;
+}
+
+/* Brand */
+
+a.navbar-brand.tracker-brand {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 11px;
+    white-space: nowrap;
+    word-break: normal;
+    flex-shrink: 0;
+    color: #164e32;
+    font-size: 1.3rem;
+    font-weight: 750;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+}
+
+.tracker-brand:hover {
+    color: #164e32;
+}
+
+.brand-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #164e32;
+    color: #ffffff;
+    border-radius: 9px;
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.brand-name {
+    white-space: nowrap;
+}
+
+.brand-highlight {
+    color: #a17b2f;
+}
+
+/* Navigation links */
+
+.tracker-navbar .nav-link {
+    color: #46564b;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 10px 13px;
+    transition: color 0.2s ease;
+}
+
+.tracker-navbar .nav-link:hover {
+    color: #164e32;
+}
+
+/* Get Started button */
+
+.tracker-navbar .tracker-nav-button {
+    background: #164e32;
+    color: #ffffff;
+    padding: 11px 21px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.tracker-navbar .tracker-nav-button:hover {
+    background: #236b46;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.tracker-navbar .tracker-nav-button span {
+    margin-left: 5px;
+}
+
+/* Mobile toggle */
+
+.tracker-navbar .navbar-toggler {
+    border: 1px solid #dce5dc;
+    padding: 7px 10px;
+    box-shadow: none;
+}
+
+.tracker-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(22, 78, 50, 0.12);
+}
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
+    white-space: normal;
+}
+
+/* ==============================
+   DEFAULT BOOTSTRAP OVERRIDES
+============================== */
+
 a {
-  color: #0077cc;
+    color: #0077cc;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+/* ==============================
+   RESPONSIVE NAVBAR
+============================== */
+
+@media (max-width: 991px) {
+    .tracker-navbar .navbar-collapse {
+        padding-top: 15px;
+        background: #ffffff;
+    }
+
+    .tracker-navbar .navbar-nav {
+        align-items: stretch !important;
+        gap: 5px !important;
+    }
+
+    .tracker-navbar .nav-link {
+        padding: 11px 8px;
+    }
+
+    .tracker-navbar .tracker-nav-button {
+        display: inline-block;
+        text-align: center;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 400px) {
+    a.navbar-brand.tracker-brand {
+        font-size: 1.1rem;
+        gap: 8px;
+    }
+
+    .brand-icon {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        font-size: 1.2rem;
+    }
 }

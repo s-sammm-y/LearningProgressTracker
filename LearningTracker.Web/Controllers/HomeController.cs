@@ -1,18 +1,11 @@
-using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LearningTracker.Web.Controllers
-{
-    public class HomeController : Controller
-    {
-        public IActionResult Error()
-        {
-            var model = new ErrorViewModel
-            {
-                RequestId = HttpContext.TraceIdentifier
-            };
+namespace LearningTracker.Web.Controllers;
 
-            return View("~/Views/Shared/Error.cshtml", model);
-        }
+public class HomeController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
     }
 }

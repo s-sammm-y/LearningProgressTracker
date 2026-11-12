@@ -1,0 +1,310 @@
+
+/* ==============================
+   HOME PAGE
+============================== */
+
+.home-page {
+    background: #f5f5ef;
+    color: #24352b;
+    min-height: 100vh;
+}
+
+/* Hero section */
+
+.home-hero {
+    background: #164e32;
+    color: #ffffff;
+    padding: 100px 0 110px;
+    position: relative;
+    overflow: hidden;
+}
+
+.home-hero::after {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    right: -100px;
+    bottom: -220px;
+}
+
+.home-eyebrow {
+    color: #e0bd65;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 22px;
+}
+
+.home-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 25px;
+}
+
+.home-description {
+    color: #dce8df;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 650px;
+    margin-bottom: 32px;
+}
+
+.home-button {
+    display: inline-block;
+    background: #e0bd65;
+    color: #193b28;
+    padding: 14px 30px;
+    border-radius: 5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+}
+
+.home-button:hover {
+    background: #f0d58e;
+    color: #193b28;
+    transform: translateY(-2px);
+}
+
+/* Hero information card */
+
+.home-feature-card {
+    background: #ffffff;
+    color: #24352b;
+    border: 1px solid #e5e7df;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 1;
+}
+
+.home-feature-card h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    margin-bottom: 28px;
+}
+
+.home-feature {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.home-feature:last-child {
+    margin-bottom: 0;
+}
+
+.home-feature-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    background: #edf3ed;
+    color: #24613e;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.home-feature h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.home-feature p {
+    color: #778078;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Statistics strip */
+
+.home-stats {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7df;
+}
+
+.home-stat {
+    padding: 27px 30px;
+    border-right: 1px solid #e5e7df;
+}
+
+.home-stat:last-child {
+    border-right: none;
+}
+
+.home-stat h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.home-stat p {
+    color: #818981;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+/* Lower section */
+
+.home-section {
+    padding: 75px 0;
+}
+
+.home-section-label {
+    color: #a17b2f;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.home-section-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin: 12px 0 18px;
+}
+
+.home-section-description {
+    color: #737d75;
+    line-height: 1.8;
+    max-width: 650px;
+}
+
+.home-bottom-card {
+    height: 100%;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #e5e7df;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-bottom-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(24, 55, 35, 0.08);
+}
+
+.home-bottom-card h5 {
+    font-weight: 700;
+    margin: 18px 0 10px;
+}
+
+.home-bottom-card p {
+    color: #778078;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* ==============================
+   RESPONSIVE DESIGN
+============================== */
+
+/* Tablets and smaller laptops */
+@media (max-width: 991px) {
+    .home-hero {
+        padding: 75px 0;
+    }
+
+    .home-feature-card {
+        margin-top: 40px;
+    }
+
+    .home-title {
+        font-size: clamp(2.8rem, 7vw, 4rem);
+    }
+}
+
+/* Mobile devices */
+@media (max-width: 767px) {
+    .home-hero {
+        padding: 55px 0 65px;
+    }
+
+    .home-title {
+        font-size: clamp(2.4rem, 9vw, 3.2rem);
+        line-height: 1.12;
+        letter-spacing: -1px;
+    }
+
+    .home-description {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+
+    .home-feature-card {
+        margin-top: 35px;
+        padding: 24px 20px;
+    }
+
+    .home-feature-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .home-feature {
+        gap: 12px;
+        margin-bottom: 22px;
+    }
+
+    .home-feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .home-stat {
+        border-right: none;
+        border-bottom: 1px solid #e5e7df;
+        padding: 20px;
+    }
+
+    .home-stat:last-child {
+        border-bottom: none;
+    }
+
+    .home-section {
+        padding: 50px 0;
+    }
+
+    .home-section-title {
+        font-size: 2rem;
+    }
+
+    .home-bottom-card {
+        padding: 24px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+    .home-hero {
+        padding: 45px 0 55px;
+    }
+
+    .home-title {
+        font-size: 2.3rem;
+    }
+
+    .home-feature-card {
+        padding: 20px 16px;
+    }
+
+    .home-feature p {
+        font-size: 0.82rem;
+    }
+}

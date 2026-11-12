@@ -1,8 +1,161 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/home.css"
+          asp-append-version="true" />
+}
+
+<div class="home-page">
+
+    <!-- Hero -->
+    <section class="home-hero">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <div class="col-lg-7">
+                    <span class="home-eyebrow">
+                        Three-day full-stack project
+                    </span>
+
+                    <h1 class="home-title">
+                        Learning Progress<br />
+                        Tracker
+                    </h1>
+
+                    <p class="home-description">
+                        Build better learning experiences. Create candidate
+                        accounts, assign training activities, and track
+                        progress through one centralized platform.
+                    </p>
+
+                    <a asp-controller="Auth"
+                       asp-action="Login"
+                       class="home-button">
+                        Get Started &rarr;
+                    </a>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="home-feature-card">
+                        <h3>Everything in one place</h3>
+
+                        <div class="home-feature">
+                            <div class="home-feature-icon">01</div>
+                            <div>
+                                <h5>Candidate Management</h5>
+                                <p>Manage candidate accounts and cohorts.</p>
+                            </div>
+                        </div>
+
+                        <div class="home-feature">
+                            <div class="home-feature-icon">02</div>
+                            <div>
+                                <h5>Training Activities</h5>
+                                <p>Create and assign learning activities.</p>
+                            </div>
+                        </div>
+
+                        <div class="home-feature">
+                            <div class="home-feature-icon">03</div>
+                            <div>
+                                <h5>Progress Tracking</h5>
+                                <p>Monitor individual and cohort progress.</p>
+                            </div>
+                        </div>
+
+                        <div class="home-feature">
+                            <div class="home-feature-icon">04</div>
+                            <div>
+                                <h5>Secure Access</h5>
+                                <p>Dedicated access for Coordinators and Candidates.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Information strip -->
+    <section class="home-stats">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 home-stat">
+                    <h3>One Platform</h3>
+                    <p>Centralized learning management</p>
+                </div>
+
+                <div class="col-md-4 home-stat">
+                    <h3>Two Roles</h3>
+                    <p>Coordinator and Candidate access</p>
+                </div>
+
+                <div class="col-md-4 home-stat">
+                    <h3>One Goal</h3>
+                    <p>Better learning outcomes</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="home-section" id="features">
+        <div class="container">
+
+            <span class="home-section-label">What you can do</span>
+
+            <h2 class="home-section-title">
+                Everything you need to track learning
+            </h2>
+
+            <p class="home-section-description mb-5">
+                From assigning training to reviewing completion rates,
+                the platform brings the entire learning workflow together.
+            </p>
+
+            <div class="row g-4">
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="home-bottom-card">
+                        <div class="home-feature-icon">01</div>
+                        <h5>Manage Candidates</h5>
+                        <p>Create candidate accounts and organize them into cohorts.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="home-bottom-card">
+                        <div class="home-feature-icon">02</div>
+                        <h5>Assign Training</h5>
+                        <p>Assign relevant learning activities to each candidate.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="home-bottom-card">
+                        <div class="home-feature-icon">03</div>
+                        <h5>Track Progress</h5>
+                        <p>Follow activity status and completion across cohorts.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="home-bottom-card">
+                        <div class="home-feature-icon">04</div>
+                        <h5>Review Performance</h5>
+                        <p>Use progress summaries to understand training outcomes.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
 </div>

@@ -67,6 +67,15 @@ builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 
 var app = builder.Build();
 
+// Automatically apply pending EF Core migrations
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider
+        .GetRequiredService<ApplicationDbContext>();
+
+    await dbContext.Database.MigrateAsync();
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

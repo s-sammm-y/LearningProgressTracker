@@ -1,4 +1,3 @@
-
 # Build stage
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 
@@ -22,6 +21,11 @@ RUN dotnet publish LearningTracker.Web/LearningTracker.Web.csproj \
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 
 WORKDIR /app
+
+# Install Kerberos GSSAPI runtime library required by Npgsql
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgssapi-krb5-2 \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy published application
 COPY --from=build /app/publish .

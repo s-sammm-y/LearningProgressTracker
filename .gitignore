@@ -1,2 +1,6 @@
 # Environment-specific secrets
 **/appsettings.Development.json
+
+# Build output
+**/bin/
+**/obj/

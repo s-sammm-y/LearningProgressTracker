@@ -1,78 +1,144 @@
+
 @model List<LearningTracker.Models.Entities.Learner>
 
 @{
     ViewData["Title"] = "Candidates";
 }
 
-<div class="container mt-4">
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/learners.css"
+          asp-append-version="true" />
+}
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h2>Candidates</h2>
-            <p class="text-muted mb-0">
-                Manage all registered candidates.
-            </p>
-        </div>
+<div class="learners-page">
+    <div class="container py-5">
 
-        <a asp-controller="Learners"
-           asp-action="Create"
-           class="btn btn-primary">
-            <i class="bi bi-person-plus"></i>
-            Add Candidate
-        </a>
-    </div>
+        <!-- Page Header -->
+        <div class="learners-header">
+            <div>
+                <span class="learners-eyebrow">People Management</span>
 
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">
-            No candidates have been registered yet.
-        </div>
-    }
-    else
-    {
-        <div class="card shadow-sm border-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <h1 class="learners-title">Candidates</h1>
 
-                    <thead class="table-light">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Cohort</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        @foreach (var learner in Model)
-                        {
-                            <tr>
-                                <td>@learner.DisplayName</td>
-                                <td>@learner.Account.NormalizedEmail</td>
-                                <td>@learner.Cohort</td>
-                                <td>
-                                    <a asp-controller="Learners"
-                                    asp-action="Details"
-                                    asp-route-id="@learner.Id"
-                                    class="btn btn-outline-primary btn-sm">
-                                        View Details
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-
-                </table>
+                <p class="learners-description">
+                    Manage candidate accounts, view their details,
+                    and keep track of their assigned learning journey.
+                </p>
             </div>
+
+            <a asp-controller="Learners"
+               asp-action="Create"
+               class="learners-primary-button">
+                <i class="bi bi-person-plus"></i>
+                Add Candidate
+            </a>
         </div>
-    }
 
-    <div class="mt-3">
-        <a asp-controller="Dashboard"
-           asp-action="Index"
-           class="btn btn-outline-secondary">
-            Back to Dashboard
-        </a>
+        <!-- Candidate Content -->
+        @if (!Model.Any())
+        {
+            <div class="learners-empty-state">
+                <div class="learners-empty-icon">
+                    <i class="bi bi-people"></i>
+                </div>
+
+                <h3>No candidates yet</h3>
+
+                <p>
+                    You haven't registered any candidates.
+                    Start by creating your first candidate account.
+                </p>
+
+                <a asp-controller="Learners"
+                   asp-action="Create"
+                   class="learners-primary-button">
+                    <i class="bi bi-plus-lg"></i>
+                    Add First Candidate
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="learners-table-card">
+
+                <!-- Table Header -->
+                <div class="learners-table-heading">
+                    <div>
+                        <h4>Registered Candidates</h4>
+                        <p>View and manage your candidate accounts.</p>
+                    </div>
+
+                    <span class="learners-count">
+                        @Model.Count @(Model.Count == 1 ? "Candidate" : "Candidates")
+                    </span>
+                </div>
+
+                <!-- Candidate Table -->
+                <div class="table-responsive">
+                    <table class="table learners-table align-middle mb-0">
+
+                        <thead>
+                            <tr>
+                                <th>Candidate</th>
+                                <th>Email Address</th>
+                                <th>Cohort</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var learner in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="candidate-name">
+                                            <div class="candidate-avatar">
+                                                @learner.DisplayName.Substring(0, 1).ToUpper()
+                                            </div>
+
+                                            <span>@learner.DisplayName</span>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <span class="candidate-email">
+                                            @learner.Account.NormalizedEmail
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="cohort-badge">
+                                            @learner.Cohort
+                                        </span>
+                                    </td>
+
+                                    <td class="text-end">
+                                        <a asp-controller="Learners"
+                                           asp-action="Details"
+                                           asp-route-id="@learner.Id"
+                                           class="learners-view-button">
+                                            View Details
+                                            <i class="bi bi-arrow-right"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        }
+
+        <!-- Back Navigation -->
+        <div class="learners-back">
+            <a asp-controller="Dashboard"
+               asp-action="Index">
+                <i class="bi bi-arrow-left"></i>
+                Back to Dashboard
+            </a>
+        </div>
+
     </div>
-
 </div>

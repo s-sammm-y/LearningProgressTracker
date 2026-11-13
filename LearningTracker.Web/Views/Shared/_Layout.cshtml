@@ -15,7 +15,7 @@
     
     <header>
         <nav class="navbar navbar-expand-lg tracker-navbar">
-            <div class="container">
+            <div class="container-fluid px-4 px-lg-5">
 
                 <!-- Brand -->
                 <a class="navbar-brand tracker-brand"
@@ -59,21 +59,40 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link"
-                            asp-controller="Auth"
-                            asp-action="Login">
-                                Sign In
-                            </a>
-                        </li>
+                         @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item">
+                                <form asp-controller="Auth"
+                                    asp-action="Logout"
+                                    method="post"
+                                    class="d-inline">
 
-                        <li class="nav-item">
-                            <a class="nav-link tracker-nav-button"
-                            asp-controller="Auth"
-                            asp-action="Login">
-                                Get Started <span>→</span>
-                            </a>
-                        </li>
+                                    <button type="submit"
+                                            class="nav-link tracker-nav-button border-0">
+                                        Logout <span>→</span>
+                                    </button>
+
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                asp-controller="Auth"
+                                asp-action="Login">
+                                    Sign In
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link tracker-nav-button"
+                                asp-controller="Auth"
+                                asp-action="Login">
+                                    Get Started <span>→</span>
+                                </a>
+                            </li>
+                        }
 
                     </ul>
                 </div>
@@ -82,13 +101,34 @@
         </nav>
     </header>
 
-
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
-    <footer class="border-top footer text-muted">
+    <footer class="tracker-footer">
         <div class="container">
-            &copy; 2026 - LearningTracker.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="tracker-footer-content">
+
+                <a class="tracker-footer-brand"
+                asp-controller="Home"
+                asp-action="Index">
+                    <span class="footer-brand-icon">L</span>
+                    <span>
+                        Learning<span class="footer-brand-highlight">Tracker</span>
+                    </span>
+                </a>
+
+                <p class="tracker-footer-copyright">
+                    &copy; @DateTime.Now.Year LearningTracker. All rights reserved.
+                </p>
+
+                <a class="tracker-footer-link"
+                asp-controller="Home"
+                asp-action="Privacy">
+                    Privacy Policy
+                    <i class="bi bi-arrow-up-right"></i>
+                </a>
+
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

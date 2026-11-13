@@ -32,11 +32,33 @@
                         progress through one centralized platform.
                     </p>
 
-                    <a asp-controller="Auth"
-                       asp-action="Login"
-                       class="home-button">
-                        Get Started &rarr;
-                    </a>
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        if (User.IsInRole("Coordinator"))
+                        {
+                            <a asp-controller="Dashboard"
+                            asp-action="Index"
+                            class="home-button">
+                                Go to Dashboard &rarr;
+                            </a>
+                        }
+                        else if (User.IsInRole("Candidate"))
+                        {
+                            <a asp-controller="MyTraining"
+                            asp-action="Index"
+                            class="home-button">
+                                View My Training &rarr;
+                            </a>
+                        }
+                    }
+                    else
+                    {
+                        <a asp-controller="Auth"
+                        asp-action="Login"
+                        class="home-button">
+                            Get Started &rarr;
+                        </a>
+                    }
                 </div>
 
                 <div class="col-lg-5">

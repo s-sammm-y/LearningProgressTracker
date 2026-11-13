@@ -22,10 +22,25 @@ main {
 /* ==============================
    LEARNING TRACKER NAVBAR
 ============================== */
-.tracker-navbar > .container {
+
+.tracker-navbar {
+    background: #ffffff;
+    padding: 14px 0;
+    border-bottom: 1px solid #e8ebe6;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1050;
+}
+
+/* Desktop navbar layout */
+
+.tracker-navbar > .container-fluid {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+    width: 100%;
 }
 
 .tracker-navbar .navbar-collapse {
@@ -34,33 +49,18 @@ main {
 }
 
 .tracker-navbar .navbar-nav {
+    display: flex;
     flex-wrap: nowrap;
+    margin-left: auto;
 }
 
 .tracker-navbar .nav-item {
     white-space: nowrap;
 }
 
-.tracker-navbar {
-    background: #ffffff;
-    padding: 14px 0;
-    border-bottom: 1px solid #e8ebe6;
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
-
-    /* Keep navbar visible while scrolling */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1050;
-}
-
-/* Prevent page content from going behind navbar */
-body {
-    padding-top: 67px;
-}
-
-/* Brand */
+/* ==============================
+   BRAND
+============================== */
 
 a.navbar-brand.tracker-brand {
     display: inline-flex;
@@ -106,7 +106,9 @@ a.navbar-brand.tracker-brand {
     color: #a17b2f;
 }
 
-/* Navigation links */
+/* ==============================
+   NAVIGATION LINKS
+============================== */
 
 .tracker-navbar .nav-link {
     color: #46564b;
@@ -120,7 +122,9 @@ a.navbar-brand.tracker-brand {
     color: #164e32;
 }
 
-/* Get Started button */
+/* ==============================
+   GET STARTED / LOGOUT BUTTON
+============================== */
 
 .tracker-navbar .tracker-nav-button {
     background: #164e32;
@@ -140,7 +144,18 @@ a.navbar-brand.tracker-brand {
     margin-left: 5px;
 }
 
-/* Mobile toggle */
+/* Logout button form */
+
+.tracker-navbar button.tracker-nav-button {
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ==============================
+   MOBILE TOGGLE
+============================== */
 
 .tracker-navbar .navbar-toggler {
     border: 1px solid #dce5dc;
@@ -153,15 +168,114 @@ a.navbar-brand.tracker-brand {
 }
 
 /* ==============================
-   FOOTER
+   LEARNING TRACKER FOOTER
 ============================== */
 
-.footer {
+.tracker-footer {
     width: 100%;
-    padding: 20px 0;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-top: 1px solid #e5e7df;
+    padding: 14px 0;
+    margin-top: auto;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+.tracker-footer-content {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Footer brand */
+
+footer.tracker-footer a.tracker-footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #164e32;
+    font-size: 1rem;
+    font-weight: 750;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+footer.tracker-footer a.tracker-footer-brand:hover {
+    color: #164e32;
+}
+
+.footer-brand-icon {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #164e32;
+    color: #ffffff;
+    border-radius: 7px;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.footer-brand-highlight {
+    color: #a17b2f;
+}
+
+/* Copyright */
+
+.tracker-footer-copyright {
+    color: #818981;
+    font-size: 0.85rem;
+    margin: 0;
     text-align: center;
-    border-top: 1px solid #e5e5e5;
-    white-space: normal;
+}
+
+/* Privacy link */
+
+footer.tracker-footer a.tracker-footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #647168;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+}
+
+footer.tracker-footer a.tracker-footer-link:hover {
+    color: #164e32;
+}
+
+/* ==============================
+   RESPONSIVE FOOTER
+============================== */
+
+@media (max-width: 767px) {
+
+    .tracker-footer {
+        padding: 18px 0;
+    }
+
+    .tracker-footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .tracker-footer-copyright {
+        order: 2;
+    }
+
+    .tracker-footer-link {
+        order: 3;
+    }
 }
 
 /* ==============================
@@ -207,28 +321,69 @@ button.accept-policy {
 ============================== */
 
 @media (max-width: 991px) {
+
+    /* Allow navbar to occupy multiple rows */
+
+    .tracker-navbar > .container-fluid {
+        flex-wrap: wrap;
+    }
+
+    /* Keep brand and hamburger on first row */
+
+    .tracker-navbar .navbar-brand {
+        margin-right: auto;
+    }
+
+    /* Expanded menu takes full width */
+
     .tracker-navbar .navbar-collapse {
+        flex-basis: 100%;
+        width: 100%;
+        flex-grow: 1;
+        min-width: 100%;
         padding-top: 15px;
         background: #ffffff;
     }
 
+    /* Stack navigation items vertically */
+
     .tracker-navbar .navbar-nav {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
         align-items: stretch !important;
         gap: 5px !important;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .tracker-navbar .nav-item {
+        width: 100%;
+        white-space: normal;
     }
 
     .tracker-navbar .nav-link {
+        display: block;
+        width: 100%;
         padding: 11px 8px;
     }
 
+    /* Keep Logout / Get Started compact */
+
     .tracker-navbar .tracker-nav-button {
         display: inline-block;
+        width: auto;
         text-align: center;
         margin-top: 5px;
     }
 }
 
+/* ==============================
+   SMALL MOBILE SCREENS
+============================== */
+
 @media (max-width: 400px) {
+
     a.navbar-brand.tracker-brand {
         font-size: 1.1rem;
         gap: 8px;

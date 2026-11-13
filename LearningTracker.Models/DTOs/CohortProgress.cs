@@ -12,3 +12,4 @@ public class CohortProgress
 
     public decimal CompletionPercentage { get; set; }
 }
+

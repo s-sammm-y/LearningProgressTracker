@@ -1,3 +1,4 @@
+
 @using LearningTracker.Models.Enums
 @model List<LearningTracker.Models.Entities.Assignment>
 
@@ -5,101 +6,190 @@
     ViewData["Title"] = "My Training";
 }
 
-<div class="container mt-4">
-@if (TempData["SuccessMessage"] is string successMessage)
-{
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @successMessage
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-}
+<div class="my-training-page">
+    <div class="container py-5">
 
-    <div class="mb-4">
-        <h2>My Training</h2>
-        <p class="text-muted">
-            View your assigned learning activities and track your progress.
-        </p>
-    </div>
+        <!-- Success Message -->
+        @if (TempData["SuccessMessage"] is string successMessage)
+        {
+            <div class="my-training-alert alert alert-dismissible fade show"
+                 role="alert">
 
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info">
-            No training assigned yet
-        </div>
-    }
-    else
-    {
-        <div class="card shadow-sm border-0">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <span>
+                    <i class="bi bi-check-circle-fill me-2"></i>
+                    @successMessage
+                </span>
 
-                    <thead class="table-light">
-                        <tr>
-                            <th>Activity</th>
-                            <th>Topic</th>
-                            <th>Planned Hours</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
+                <button type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                </button>
 
-                    <tbody>
-                        @foreach (var assignment in Model)
-                        {
-                            <tr>
-                                <td>@assignment.Activity.Title</td>
-                                <td>@assignment.Activity.Topic</td>
-                                <td>@assignment.Activity.PlannedHours</td>
-                                <td>
-                                    <form asp-controller="MyTraining"
-                                        asp-action="UpdateStatus"
-                                        method="post"
-                                        class="d-flex gap-2">
-
-                                        <input type="hidden"
-                                            name="AssignmentId"
-                                            value="@assignment.Id" />
-
-                                        <select name="Status" class="form-select form-select-sm">
-                                            @if (assignment.Status == AssignmentStatus.NotStarted)
-                                            {
-                                                <option value="0" selected>Not Started</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="0">Not Started</option>
-                                            }
-
-                                            @if (assignment.Status == AssignmentStatus.InProgress)
-                                            {
-                                                <option value="1" selected>In Progress</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="1">In Progress</option>
-                                            }
-
-                                            @if (assignment.Status == AssignmentStatus.Completed)
-                                            {
-                                                <option value="2" selected>Completed</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="2">Completed</option>
-                                            }
-                                        </select>
-
-                                        <button type="submit" class="btn btn-primary btn-sm">
-                                            Save
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-
-                </table>
             </div>
-        </div>
-    }
+        }
 
+        <!-- Page Header -->
+        <div class="my-training-header">
+
+            <span class="my-training-eyebrow">
+                Learning Journey
+            </span>
+
+            <h1 class="my-training-title">
+                My Training
+            </h1>
+
+            <p class="my-training-description">
+                View your assigned learning activities and track your progress.
+            </p>
+
+        </div>
+
+        <!-- Training Content -->
+        @if (!Model.Any())
+        {
+            <div class="my-training-empty-state">
+
+                <div class="my-training-empty-icon">
+                    <i class="bi bi-journal-bookmark"></i>
+                </div>
+
+                <h3>No Training Assigned Yet</h3>
+
+                <p>
+                    You don't have any learning activities assigned yet.
+                    Check back later when new activities are assigned to you.
+                </p>
+
+            </div>
+        }
+        else
+        {
+            <div class="my-training-card">
+
+                <!-- Card Header -->
+                <div class="my-training-card-header">
+
+                    <div>
+                        <h4>Assigned Learning Activities</h4>
+                        <p>Manage your learning progress and activity status.</p>
+                    </div>
+
+                    <span class="my-training-count">
+                        @Model.Count @(Model.Count == 1 ? "Activity" : "Activities")
+                    </span>
+
+                </div>
+
+                <!-- Training Table -->
+                <div class="my-training-table-scroll">
+
+                    <table class="my-training-table">
+
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Topic</th>
+                                <th>Planned Hours</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var assignment in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <span class="my-training-activity-title">
+                                            @assignment.Activity.Title
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="my-training-topic">
+                                            @assignment.Activity.Topic
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="my-training-hours">
+                                            @assignment.Activity.PlannedHours.ToString("0.00")
+                                            hrs
+                                        </span>
+                                    </td>
+
+                                    <td>
+
+                                        <form asp-controller="MyTraining"
+                                              asp-action="UpdateStatus"
+                                              method="post"
+                                              class="my-training-status-form">
+
+                                            <input type="hidden"
+                                                   name="AssignmentId"
+                                                   value="@assignment.Id" />
+
+                                            <select name="Status"
+                                                    class="my-training-status-select">
+
+                                                @if (assignment.Status == AssignmentStatus.NotStarted)
+                                                {
+                                                    <option value="0" selected>Not Started</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="0">Not Started</option>
+                                                }
+
+                                                @if (assignment.Status == AssignmentStatus.InProgress)
+                                                {
+                                                    <option value="1" selected>In Progress</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="1">In Progress</option>
+                                                }
+
+                                                @if (assignment.Status == AssignmentStatus.Completed)
+                                                {
+                                                    <option value="2" selected>Completed</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="2">Completed</option>
+                                                }
+
+                                            </select>
+
+                                            <button type="submit"
+                                                    class="my-training-save-button">
+                                                Save
+                                            </button>
+
+                                        </form>
+
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/my-training.css"
+          asp-append-version="true" />
+}

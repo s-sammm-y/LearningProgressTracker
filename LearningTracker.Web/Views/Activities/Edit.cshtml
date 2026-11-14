@@ -1,94 +1,110 @@
+
 @model LearningTracker.Web.ViewModels.EditActivityViewModel
 
 @{
     ViewData["Title"] = "Edit Activity";
 }
 
-<div class="container mt-4">
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/activities-edit.css"
+          asp-append-version="true" />
+}
 
-    <div class="mb-4">
-        <h2>Edit Learning Activity</h2>
-        <p class="text-muted">
-            Update the activity details.
-        </p>
-    </div>
+<div class="activities-edit-page">
+    <div class="container py-5">
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body p-4">
+        <!-- Page Header -->
+        <div class="activities-edit-header">
+            <span class="activities-edit-eyebrow">
+                Activity Management
+            </span>
 
-            <form asp-controller="Activities"
-                  asp-action="Edit"
-                  method="post">
+            <h2 class="activities-edit-title">
+                Edit Learning Activity
+            </h2>
 
-                <input type="hidden" asp-for="Id" />
-
-                <div asp-validation-summary="ModelOnly"
-                     class="text-danger mb-3">
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Title" class="form-label">
-                        Activity Title
-                    </label>
-
-                    <input asp-for="Title"
-                           class="form-control" />
-
-                    <span asp-validation-for="Title"
-                          class="text-danger">
-                    </span>
-                </div>
-
-                <div class="mb-3">
-                    <label asp-for="Topic" class="form-label">
-                        Topic
-                    </label>
-
-                    <input asp-for="Topic"
-                           class="form-control" />
-
-                    <span asp-validation-for="Topic"
-                          class="text-danger">
-                    </span>
-                </div>
-
-                <div class="mb-4">
-                    <label asp-for="PlannedHours"
-                           class="form-label">
-                        Planned Hours
-                    </label>
-
-                    <input asp-for="PlannedHours"
-                           class="form-control"
-                           type="number"
-                           step="0.01"
-                           min="0.01" />
-
-                    <span asp-validation-for="PlannedHours"
-                          class="text-danger">
-                    </span>
-                </div>
-
-                <div class="d-flex gap-2">
-
-                    <button type="submit"
-                            class="btn btn-primary">
-                        Save Changes
-                    </button>
-
-                    <a asp-controller="Activities"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary">
-                        Cancel
-                    </a>
-
-                </div>
-
-            </form>
-
+            <p class="activities-edit-description">
+                Update the activity details.
+            </p>
         </div>
-    </div>
 
+        <!-- Edit Form -->
+        <div class="activities-edit-card">
+            <div class="activities-edit-card-body">
+
+                <form asp-controller="Activities"
+                      asp-action="Edit"
+                      method="post"
+                      class="activities-edit-form">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3">
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Title" class="form-label">
+                            Activity Title
+                        </label>
+
+                        <input asp-for="Title"
+                               class="form-control" />
+
+                        <span asp-validation-for="Title"
+                              class="field-validation-error">
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="Topic" class="form-label">
+                            Topic
+                        </label>
+
+                        <input asp-for="Topic"
+                               class="form-control" />
+
+                        <span asp-validation-for="Topic"
+                              class="field-validation-error">
+                        </span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="PlannedHours" class="form-label">
+                            Planned Hours
+                        </label>
+
+                        <input asp-for="PlannedHours"
+                               class="form-control"
+                               type="number"
+                               step="0.01"
+                               min="0.01" />
+
+                        <span asp-validation-for="PlannedHours"
+                              class="field-validation-error">
+                        </span>
+                    </div>
+
+                    <div class="activities-edit-actions">
+                        <button type="submit"
+                                class="activities-edit-save">
+                            Save Changes
+                        </button>
+
+                        <a asp-controller="Activities"
+                           asp-action="Index"
+                           class="activities-edit-cancel">
+                            Cancel
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
 </div>
 
 @section Scripts {

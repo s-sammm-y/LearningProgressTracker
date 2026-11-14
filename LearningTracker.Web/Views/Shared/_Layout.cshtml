@@ -6,6 +6,10 @@
         User.IsInRole("Coordinator") &&
         new[] { "Dashboard", "Learners", "Activities", "Assignments" }
             .Contains(currentController);
+
+    var showCandidateSidebar =
+        User.IsInRole("Candidate") &&
+        currentController == "MyTraining";
 }
 
 <!DOCTYPE html>
@@ -169,15 +173,44 @@
 
         </div>
     }
+    else if (showCandidateSidebar)
+    {
+        <div class="coordinator-shell">
+
+            <aside class="coordinator-sidebar">
+
+                <div class="sidebar-heading">
+                    CANDIDATE
+                </div>
+
+                <nav class="sidebar-navigation">
+
+                    <a asp-controller="MyTraining"
+                    asp-action="Index"
+                    class="sidebar-link @(currentController == "MyTraining" ? "active" : "")">
+
+                        <span class="sidebar-icon">▤</span>
+                        My Training
+                    </a>
+
+                </nav>
+
+            </aside>
+
+            <main role="main" class="coordinator-main">
+                @RenderBody()
+            </main>
+        </div>
+    }
     else
     {
-        <main role="main" class="pb-3">
+        <main role="main" class="page-main">
             @RenderBody()
         </main>
     }
 
     <footer class="tracker-footer">
-        <div class="container d-flex align-items-center">
+        <div class="container">
 
             <div class="tracker-footer-content d-flex align-items-center">
 

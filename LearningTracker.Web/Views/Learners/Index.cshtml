@@ -64,18 +64,44 @@
 
                 <!-- Table Header -->
                 <div class="learners-table-heading">
+
                     <div>
                         <h4>Registered Candidates</h4>
                         <p>View and manage your candidate accounts.</p>
                     </div>
 
-                    <span class="learners-count">
+                    <span class="learners-count" id="candidateCount">
                         @Model.Count @(Model.Count == 1 ? "Candidate" : "Candidates")
                     </span>
+
+                </div>
+
+                <!-- Search -->
+                <div class="learners-search-container">
+
+                    <div class="learners-search-box">
+                        <i class="bi bi-search"></i>
+
+                        <input type="search"
+                               id="candidateSearch"
+                               class="learners-search-input"
+                               placeholder="Search by name, email or cohort..."
+                               autocomplete="off"
+                               aria-label="Search candidates" />
+
+                        <button type="button"
+                                id="clearCandidateSearch"
+                                class="learners-search-clear"
+                                aria-label="Clear search"
+                                hidden>
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </div>
+
                 </div>
 
                 <!-- Candidate Table -->
-                <div class="table-responsive">
+                <div class="table-responsive learners-table-scroll">
                     <table class="table learners-table align-middle mb-0">
 
                         <thead>
@@ -87,10 +113,13 @@
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="candidateTableBody">
+
                             @foreach (var learner in Model)
                             {
-                                <tr>
+                                <tr class="candidate-row"
+                                    data-search="@($"{learner.DisplayName} {learner.Account.NormalizedEmail} {learner.Cohort}")">
+
                                     <td>
                                         <div class="candidate-name">
                                             <div class="candidate-avatar">
@@ -122,8 +151,24 @@
                                             <i class="bi bi-arrow-right"></i>
                                         </a>
                                     </td>
+
                                 </tr>
                             }
+
+                            <!-- No Search Results -->
+                            <tr id="noSearchResults" hidden>
+                                <td colspan="4">
+                                    <div class="learners-search-empty">
+                                        <i class="bi bi-search"></i>
+                                        <h5>No matching candidates</h5>
+                                        <p>
+                                            Try searching with a different name,
+                                            email address or cohort.
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+
                         </tbody>
 
                     </table>
@@ -142,3 +187,7 @@
 
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/learners.js"
+            asp-append-version="true"></script>
+}

@@ -1,0 +1,280 @@
+
+/* =========================================
+   CREATE CANDIDATE PAGE
+========================================= */
+
+.learners-create-page {
+    min-height: 100%;
+    background: #f5f5ef;
+    color: #24352b;
+}
+
+/* =========================================
+   CREATE FORM CARD
+========================================= */
+
+.learners-create-card {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e5e7df;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(24, 55, 35, 0.05);
+}
+
+/* Card Header */
+
+.learners-create-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 25px 30px;
+    border-bottom: 1px solid #e9ece6;
+    background: #ffffff;
+}
+
+.learners-create-card-header h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #164e32;
+    margin-bottom: 5px;
+}
+
+.learners-create-card-header p {
+    color: #818981;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.learners-create-step {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 13px;
+    background: #edf3ed;
+    color: #24613e;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+/* Card Body */
+
+.learners-create-card-body {
+    padding: 32px 30px;
+}
+
+/* =========================================
+   FORM FIELDS
+========================================= */
+
+.learners-form-group {
+    margin-bottom: 25px;
+}
+
+.learners-form-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #34463a;
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+.learners-form-label span {
+    color: #a17b2f;
+    margin-left: 3px;
+}
+
+.learners-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.learners-input-wrapper > i {
+    position: absolute;
+    left: 15px;
+    color: #849087;
+    font-size: 1rem;
+    pointer-events: none;
+}
+
+.learners-form-control {
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 15px 11px 43px;
+    background: #fcfdfb;
+    color: #34463a;
+    border: 1px solid #dce4dc;
+    border-radius: 7px;
+    outline: none;
+    font-size: 0.92rem;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+}
+
+.learners-form-control::placeholder {
+    color: #a0aaa1;
+}
+
+.learners-form-control:focus {
+    background: #ffffff;
+    border-color: #548264;
+    box-shadow: 0 0 0 3px rgba(49, 95, 67, 0.12);
+}
+
+/* Validation */
+
+.learners-field-error {
+    display: block;
+    margin-top: 6px;
+    color: #c0392b;
+    font-size: 0.82rem;
+}
+
+.learners-form-control.input-validation-error {
+    border-color: #c0392b;
+}
+
+.learners-validation-summary {
+    margin-bottom: 22px;
+    color: #c0392b;
+    font-size: 0.88rem;
+}
+
+.learners-validation-summary:empty {
+    display: none;
+}
+
+/* =========================================
+   INFORMATION NOTE
+========================================= */
+
+.learners-create-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px 17px;
+    margin: 5px 0 28px;
+    background: #f7f4e9;
+    border: 1px solid #eee2c4;
+    border-radius: 7px;
+}
+
+.learners-create-note > i {
+    color: #a17b2f;
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.learners-create-note p {
+    color: #75643d;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================
+   FORM BUTTONS
+========================================= */
+
+.learners-create-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 5px;
+}
+
+.learners-create-submit,
+.learners-create-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 45px;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.learners-create-submit {
+    background: #164e32;
+    color: #ffffff;
+    border: 1px solid #164e32;
+    cursor: pointer;
+}
+
+.learners-create-submit:hover {
+    background: #236b46;
+    border-color: #236b46;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(22, 78, 50, 0.15);
+}
+
+.learners-create-cancel {
+    background: #ffffff;
+    color: #647168;
+    border: 1px solid #dce4dc;
+}
+
+.learners-create-cancel:hover {
+    background: #f5f7f3;
+    border-color: #aab9ac;
+    color: #164e32;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+    .learners-create-page .container {
+        padding-top: 30px !important;
+        padding-bottom: 30px !important;
+    }
+
+    .learners-create-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px 20px;
+    }
+
+    .learners-create-card-body {
+        padding: 25px 20px;
+    }
+
+    .learners-create-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .learners-create-submit,
+    .learners-create-cancel {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .learners-create-card-header h4 {
+        font-size: 1.15rem;
+    }
+
+    .learners-create-card-body {
+        padding: 22px 16px;
+    }
+
+    .learners-form-control {
+        font-size: 0.88rem;
+    }
+}

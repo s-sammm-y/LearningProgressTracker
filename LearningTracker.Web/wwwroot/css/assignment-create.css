@@ -1,0 +1,372 @@
+
+/* =========================================
+   ASSIGNMENT CREATE PAGE
+========================================= */
+
+.assignment-create-page {
+    min-height: 100%;
+    color: #26352d;
+    background: #f5f5ef;
+    padding-bottom: 30px;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.assignment-create-header {
+    margin-bottom: 28px;
+}
+
+.assignment-create-eyebrow {
+    display: inline-block;
+    margin-bottom: 9px;
+    color: #a18136;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+
+.assignment-create-header h2 {
+    margin-bottom: 8px;
+    color: #244b36;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.assignment-create-header p {
+    max-width: 650px;
+    margin: 0;
+    color: #78857b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   SUCCESS ALERT
+========================================= */
+
+.assignment-success-alert {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 18px;
+    margin-bottom: 22px;
+    background: #edf4ee;
+    border: 1px solid #d6e7d8;
+    border-radius: 9px;
+    color: #315f43;
+}
+
+.assignment-success-alert strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.assignment-success-alert p {
+    margin: 0;
+    color: #58745e;
+    font-size: 0.85rem;
+}
+
+.assignment-alert-close {
+    padding: 0 4px;
+    background: transparent;
+    border: none;
+    color: #58745e;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* =========================================
+   ASSIGNMENT FORM CARD
+========================================= */
+
+.assignment-create-card {
+    max-width: 850px;
+    margin: 0; /* Align card with the page header */
+    background: #ffffff;
+    border: 1px solid #e7ece6;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(35, 65, 45, 0.05);
+    overflow: hidden;
+}
+
+/* Card Header */
+
+.assignment-create-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 24px 30px;
+    background: #ffffff;
+    border-bottom: 1px solid #edf0eb;
+}
+
+.assignment-create-card-header h4 {
+    margin-bottom: 6px;
+    color: #244b36;
+    font-size: 1.12rem;
+    font-weight: 700;
+}
+
+.assignment-create-card-header p {
+    margin: 0;
+    color: #849087;
+    font-size: 0.86rem;
+}
+
+.assignment-create-badge {
+    padding: 7px 12px;
+    background: #edf4ee;
+    color: #315f43;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 650;
+    white-space: nowrap;
+}
+
+/* Card Body */
+
+.assignment-create-card-body {
+    padding: 32px 30px;
+}
+
+/* =========================================
+   FORM FIELDS
+========================================= */
+
+.assignment-form-group {
+    margin-bottom: 26px;
+}
+
+.assignment-form-label {
+    display: block;
+    margin-bottom: 9px;
+    color: #34463a;
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+.assignment-form-label span {
+    margin-left: 3px;
+    color: #a17b2f;
+}
+
+.assignment-form-control {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 11px 14px;
+    background-color: #fcfdfb;
+    color: #34463a;
+    border: 1px solid #dce4dc;
+    border-radius: 7px;
+    outline: none;
+    font-size: 0.91rem;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+}
+
+.assignment-form-control:focus {
+    background: #ffffff;
+    border-color: #548264;
+    box-shadow: 0 0 0 3px rgba(49, 95, 67, 0.12);
+}
+
+.assignment-form-control option {
+    color: #34463a;
+}
+
+.assignment-form-control.input-validation-error {
+    border-color: #c0392b;
+}
+
+.assignment-field-hint {
+    display: block;
+    margin-top: 7px;
+    color: #89948b;
+    font-size: 0.78rem;
+}
+
+.assignment-field-error {
+    display: block;
+    margin-top: 6px;
+    color: #c0392b;
+    font-size: 0.82rem;
+}
+
+.assignment-validation-summary {
+    margin-bottom: 22px;
+    color: #c0392b;
+    font-size: 0.88rem;
+}
+
+.assignment-validation-summary:empty {
+    display: none;
+}
+
+/* =========================================
+   INFORMATION NOTE
+========================================= */
+
+.assignment-create-note {
+    padding: 15px 18px;
+    margin: 5px 0 28px;
+    background: #f7f4e9;
+    border: 1px solid #eee2c4;
+    border-radius: 8px;
+}
+
+.assignment-create-note strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #85692e;
+    font-size: 0.87rem;
+}
+
+.assignment-create-note p {
+    margin: 0;
+    color: #75643d;
+    font-size: 0.84rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   FORM ACTIONS
+========================================= */
+
+.assignment-create-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 5px;
+}
+
+.assignment-create-submit,
+.assignment-create-cancel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 45px;
+    padding: 11px 20px;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.assignment-create-submit {
+    background: #315f43;
+    color: #ffffff;
+    border: 1px solid #315f43;
+    cursor: pointer;
+}
+
+.assignment-create-submit:hover {
+    background: #244b36;
+    border-color: #244b36;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(35, 65, 45, 0.12);
+}
+
+.assignment-create-cancel {
+    background: #ffffff;
+    color: #647168;
+    border: 1px solid #dce4dc;
+}
+
+.assignment-create-cancel:hover {
+    background: #f5f7f3;
+    border-color: #aab9ac;
+    color: #244b36;
+}
+
+/* =========================================
+   BACK NAVIGATION
+========================================= */
+
+.assignment-create-back {
+    max-width: 850px;
+    margin: 22px 0 0;
+    text-align: left;
+}
+
+.assignment-create-back a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #315f43;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.assignment-create-back a:hover {
+    color: #a18136;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+    .assignment-create-page {
+        margin-top: 20px;
+    }
+
+    .assignment-create-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .assignment-create-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px 20px;
+    }
+
+    .assignment-create-card-body {
+        padding: 25px 20px;
+    }
+
+    .assignment-create-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .assignment-create-submit,
+    .assignment-create-cancel {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .assignment-create-header h2 {
+        font-size: 1.35rem;
+    }
+
+    .assignment-create-card-body {
+        padding: 22px 16px;
+    }
+
+    .assignment-create-badge {
+        font-size: 0.74rem;
+    }
+
+    .assignment-form-control {
+        font-size: 0.86rem;
+    }
+}

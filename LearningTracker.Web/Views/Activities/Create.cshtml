@@ -1,87 +1,101 @@
+
 @model LearningTracker.Web.ViewModels.CreateActivityViewModel
 
 @{
     ViewData["Title"] = "Add Activity";
 }
 
-<div class="container mt-4">
+<div class="container mt-4 activity-create-page">
 
-    <div class="mb-4">
-        <h2>Add Learning Activity</h2>
-        <p class="text-muted">
-            Create a new activity for candidates.
-        </p>
+    <!-- Page Header -->
+    <div class="activity-create-header mb-4">
+        <div>
+            <span class="activity-create-eyebrow">ACTIVITY MANAGEMENT</span>
+            <h2 class="activity-create-title">Add Learning Activity</h2>
+            <p class="activity-create-description">
+                Create a new activity for candidates.
+            </p>
+        </div>
     </div>
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body p-4">
+    <!-- Create Activity Form -->
+    <div class="activity-create-card">
+
+        <div class="activity-create-card-header">
+            <h4>Activity Information</h4>
+            <p>Enter the details of the learning activity below.</p>
+        </div>
+
+        <div class="activity-create-card-body">
 
             <form asp-controller="Activities"
                   asp-action="Create"
                   method="post">
 
                 <div asp-validation-summary="ModelOnly"
-                     class="text-danger mb-3">
+                     class="activity-validation-summary mb-3">
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Title"
-                           class="form-label">
+                <!-- Activity Title -->
+                <div class="activity-form-group">
+                    <label asp-for="Title" class="activity-form-label">
                         Activity Title
                     </label>
 
                     <input asp-for="Title"
-                           class="form-control"
+                           class="form-control activity-form-control"
                            placeholder="e.g. Java Fundamentals" />
 
                     <span asp-validation-for="Title"
-                          class="text-danger">
+                          class="text-danger activity-validation-message">
                     </span>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="Topic"
-                           class="form-label">
+                <!-- Topic -->
+                <div class="activity-form-group">
+                    <label asp-for="Topic" class="activity-form-label">
                         Topic
                     </label>
 
                     <input asp-for="Topic"
-                           class="form-control"
+                           class="form-control activity-form-control"
                            placeholder="e.g. Programming" />
 
                     <span asp-validation-for="Topic"
-                          class="text-danger">
+                          class="text-danger activity-validation-message">
                     </span>
                 </div>
 
-                <div class="mb-4">
-                    <label asp-for="PlannedHours"
-                           class="form-label">
+                <!-- Planned Hours -->
+                <div class="activity-form-group">
+                    <label asp-for="PlannedHours" class="activity-form-label">
                         Planned Hours
                     </label>
 
                     <input asp-for="PlannedHours"
-                           class="form-control"
+                           class="form-control activity-form-control"
                            type="number"
                            step="0.01"
                            min="0.01"
                            placeholder="e.g. 20" />
 
                     <span asp-validation-for="PlannedHours"
-                          class="text-danger">
+                          class="text-danger activity-validation-message">
                     </span>
                 </div>
 
-                <div class="d-flex gap-2">
+                <!-- Form Actions -->
+                <div class="activity-form-actions">
 
                     <button type="submit"
-                            class="btn btn-primary">
+                            class="activity-create-button">
+                        <i class="bi bi-plus-circle"></i>
                         Create Activity
                     </button>
 
                     <a asp-controller="Activities"
                        asp-action="Index"
-                       class="btn btn-outline-secondary">
+                       class="activity-cancel-button">
                         Cancel
                     </a>
 
@@ -93,6 +107,12 @@
     </div>
 
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/activities-create.css"
+          asp-append-version="true" />
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

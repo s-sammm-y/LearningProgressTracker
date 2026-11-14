@@ -1,0 +1,240 @@
+
+/* =========================================
+   ACTIVITY CREATE PAGE
+========================================= */
+
+.activity-create-page {
+    min-height: 100%;
+    padding-bottom: 35px;
+    color: #24352b;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.activity-create-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activity-create-eyebrow {
+    display: inline-block;
+    color: #a17b2f;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.activity-create-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    font-weight: 700;
+    color: #164e32;
+    margin-bottom: 10px;
+}
+
+.activity-create-description {
+    color: #737d75;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* =========================================
+   FORM CARD
+========================================= */
+
+.activity-create-card {
+    max-width: 760px;
+    background: #ffffff;
+    border: 1px solid #e5e7df;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(24, 55, 35, 0.05);
+}
+
+/* Card Header */
+
+.activity-create-card-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid #e9ece6;
+}
+
+.activity-create-card-header h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #164e32;
+    margin-bottom: 6px;
+}
+
+.activity-create-card-header p {
+    color: #818981;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* Card Body */
+
+.activity-create-card-body {
+    padding: 30px;
+}
+
+/* =========================================
+   FORM FIELDS
+========================================= */
+
+.activity-form-group {
+    margin-bottom: 24px;
+}
+
+.activity-form-label {
+    display: block;
+    color: #34463a;
+    font-size: 0.92rem;
+    font-weight: 650;
+    margin-bottom: 9px;
+}
+
+.activity-form-control {
+    min-height: 46px;
+    padding: 11px 14px;
+    background: #fcfdfb;
+    border: 1px solid #dce4dc;
+    border-radius: 7px;
+    color: #34463a;
+    font-size: 0.93rem;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.activity-form-control::placeholder {
+    color: #a0aaa1;
+}
+
+.activity-form-control:focus {
+    background: #ffffff;
+    border-color: #548264;
+    box-shadow: 0 0 0 3px rgba(49, 95, 67, 0.12);
+    outline: none;
+}
+
+.activity-validation-message {
+    display: block;
+    font-size: 0.82rem;
+    margin-top: 6px;
+}
+
+.activity-validation-summary {
+    color: #b42318;
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   FORM ACTIONS
+========================================= */
+
+.activity-form-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 32px;
+    padding-top: 22px;
+    border-top: 1px solid #edf0eb;
+}
+
+/* Create Button */
+
+.activity-create-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 11px 20px;
+    background: #164e32;
+    color: #ffffff;
+    border: 1px solid #164e32;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.activity-create-button:hover {
+    background: #236b46;
+    border-color: #236b46;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(22, 78, 50, 0.15);
+}
+
+/* Cancel Button */
+
+.activity-cancel-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 20px;
+    background: #ffffff;
+    color: #647168;
+    border: 1px solid #d5ddd6;
+    border-radius: 6px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.activity-cancel-button:hover {
+    background: #f3f6f2;
+    color: #164e32;
+    border-color: #a8b9aa;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+    .activity-create-page {
+        margin-top: 20px !important;
+    }
+
+    .activity-create-title {
+        font-size: 2rem;
+    }
+
+    .activity-create-card-header {
+        padding: 20px;
+    }
+
+    .activity-create-card-body {
+        padding: 20px;
+    }
+
+    .activity-form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .activity-create-button,
+    .activity-cancel-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .activity-create-title {
+        font-size: 1.75rem;
+    }
+
+    .activity-create-description {
+        font-size: 0.92rem;
+    }
+}

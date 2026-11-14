@@ -1,98 +1,170 @@
+
 @model LearningTracker.Web.ViewModels.AssignActivityViewModel
 
 @{
     ViewData["Title"] = "Assign Activity";
 }
 
-<div class="container mt-4">
+<div class="assignment-create-page">
+    <div class="container py-5">
 
-    <div class="mb-4">
-        <h2>Assign Learning Activity</h2>
-        <p class="text-muted">
-            Assign an existing learning activity to a candidate.
-        </p>
-    </div>
+        <!-- Page Header -->
+        <div class="assignment-create-header">
+            <div>
+                <span class="assignment-create-eyebrow">
+                    Training Management
+                </span>
 
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show"
-             role="alert">
-            @TempData["SuccessMessage"]
+                <h2>Assign Learning Activity</h2>
 
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close">
-            </button>
+                <p>
+                    Assign an existing learning activity to a candidate
+                    and help them progress through their learning journey.
+                </p>
+            </div>
         </div>
-    }
 
-    <div class="card shadow-sm border-0">
-        <div class="card-body p-4">
-
-            <form asp-controller="Assignments"
-                  asp-action="Create"
-                  method="post">
-
-                <div asp-validation-summary="ModelOnly"
-                     class="text-danger mb-3">
+        <!-- Success Message -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="assignment-success-alert"
+                 role="alert">
+                <div>
+                    <strong>Assignment Successful</strong>
+                    <p>@TempData["SuccessMessage"]</p>
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="LearnerId"
-                           class="form-label">
-                        Select Candidate
-                    </label>
+                <button type="button"
+                        class="assignment-alert-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close">
+                    &times;
+                </button>
+            </div>
+        }
 
-                    <select asp-for="LearnerId"
-                            asp-items="Model.Learners"
-                            class="form-select">
-                        <option value="">-- Select Candidate --</option>
-                    </select>
+        <!-- Assignment Form Card -->
+        <div class="assignment-create-card">
 
-                    <span asp-validation-for="LearnerId"
-                          class="text-danger">
-                    </span>
+            <div class="assignment-create-card-header">
+                <div>
+                    <h4>Assignment Details</h4>
+                    <p>Select a candidate and the learning activity to assign.</p>
                 </div>
 
-                <div class="mb-4">
-                    <label asp-for="ActivityId"
-                           class="form-label">
-                        Select Learning Activity
-                    </label>
+                <span class="assignment-create-badge">
+                    New Assignment
+                </span>
+            </div>
 
-                    <select asp-for="ActivityId"
-                            asp-items="Model.Activities"
-                            class="form-select">
-                        <option value="">-- Select Activity --</option>
-                    </select>
+            <div class="assignment-create-card-body">
 
-                    <span asp-validation-for="ActivityId"
-                          class="text-danger">
-                    </span>
-                </div>
+                <form asp-controller="Assignments"
+                      asp-action="Create"
+                      method="post">
 
-                <div class="d-flex gap-2">
+                    <!-- Validation Summary -->
+                    <div asp-validation-summary="ModelOnly"
+                         class="assignment-validation-summary">
+                    </div>
 
-                    <button type="submit"
-                            class="btn btn-primary">
-                        Assign Activity
-                    </button>
+                    <!-- Candidate Selection -->
+                    <div class="assignment-form-group">
 
-                    <a asp-controller="Dashboard"
-                       asp-action="Index"
-                       class="btn btn-outline-secondary">
-                        Cancel
-                    </a>
+                        <label asp-for="LearnerId"
+                               class="assignment-form-label">
+                            Select Candidate
+                            <span>*</span>
+                        </label>
 
-                </div>
+                        <select asp-for="LearnerId"
+                                asp-items="Model.Learners"
+                                class="assignment-form-control">
+                            <option value="">-- Select Candidate --</option>
+                        </select>
 
-            </form>
+                        <span asp-validation-for="LearnerId"
+                              class="assignment-field-error">
+                        </span>
 
+                        <small class="assignment-field-hint">
+                            Choose the candidate who will receive this activity.
+                        </small>
+
+                    </div>
+
+                    <!-- Activity Selection -->
+                    <div class="assignment-form-group">
+
+                        <label asp-for="ActivityId"
+                               class="assignment-form-label">
+                            Select Learning Activity
+                            <span>*</span>
+                        </label>
+
+                        <select asp-for="ActivityId"
+                                asp-items="Model.Activities"
+                                class="assignment-form-control">
+                            <option value="">-- Select Learning Activity --</option>
+                        </select>
+
+                        <span asp-validation-for="ActivityId"
+                              class="assignment-field-error">
+                        </span>
+
+                        <small class="assignment-field-hint">
+                            Choose the learning activity you want to assign.
+                        </small>
+
+                    </div>
+
+                    <!-- Information Note -->
+                    <div class="assignment-create-note">
+                        <strong>Note</strong>
+                        <p>
+                            A candidate cannot be assigned the same learning
+                            activity more than once.
+                        </p>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="assignment-create-actions">
+
+                        <button type="submit"
+                                class="assignment-create-submit">
+                            Assign Activity
+                        </button>
+
+                        <a asp-controller="Dashboard"
+                           asp-action="Index"
+                           class="assignment-create-cancel">
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
         </div>
-    </div>
 
+        <!-- Back Navigation -->
+        <div class="assignment-create-back">
+            <a asp-controller="Dashboard"
+               asp-action="Index">
+                <i class="bi bi-arrow-left"></i>
+                Back to Dashboard
+            </a>
+        </div>
+
+    </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/assignment-create.css"
+          asp-append-version="true" />
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

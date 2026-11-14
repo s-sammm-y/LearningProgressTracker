@@ -1,92 +1,143 @@
+
 @model LearningTracker.Web.ViewModels.CreateLearnerViewModel
 
 @{
     ViewData["Title"] = "Create Learner";
 }
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-md-7">
+<div class="learners-create-page">
+    <div class="container py-5">
 
-            <div class="card shadow-sm border-0">
-                <div class="card-body p-4">
+        <div class="learners-create-card">
 
-                    <h3 class="mb-2">Create Learner</h3>
-
-                    <p class="text-muted mb-4">
+            <!-- Card Header -->
+            <div class="learners-create-card-header">
+                <div>
+                    <h4>Create Candidate</h4>
+                    <p>
                         Add a new candidate to the Learning Tracker.
-                        Login credentials will be generated automatically.
+                        Their login credentials will be generated automatically.
                     </p>
-
-                    <form asp-action="Create" method="post">
-
-                        <div asp-validation-summary="ModelOnly"
-                             class="text-danger mb-3">
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="DisplayName"
-                                   class="form-label">
-                                Full Name
-                            </label>
-
-                            <input asp-for="DisplayName"
-                                   class="form-control"
-                                   placeholder="Enter learner's name" />
-
-                            <span asp-validation-for="DisplayName"
-                                  class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="Email"
-                                   class="form-label">
-                                Email Address
-                            </label>
-
-                            <input asp-for="Email"
-                                   class="form-control"
-                                   placeholder="Enter learner's email" />
-
-                            <span asp-validation-for="Email"
-                                  class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-4">
-                            <label asp-for="Cohort"
-                                   class="form-label">
-                                Cohort
-                            </label>
-
-                            <input asp-for="Cohort"
-                                   class="form-control"
-                                   placeholder="e.g. Deloitte 2026" />
-
-                            <span asp-validation-for="Cohort"
-                                  class="text-danger"></span>
-                        </div>
-
-                        <div class="d-flex gap-2">
-                            <button type="submit"
-                                    class="btn btn-primary">
-                                Create Learner
-                            </button>
-
-                            <a asp-controller="Dashboard"
-                               asp-action="Index"
-                               class="btn btn-outline-secondary">
-                                Cancel
-                            </a>
-                        </div>
-
-                    </form>
-
                 </div>
+
+                <span class="learners-create-step">
+                    <i class="bi bi-person-plus"></i>
+                    New Candidate
+                </span>
             </div>
 
+            <!-- Card Body -->
+            <div class="learners-create-card-body">
+
+                <form asp-action="Create" method="post">
+
+                    <!-- Validation Summary -->
+                    <div asp-validation-summary="ModelOnly"
+                         class="learners-validation-summary">
+                    </div>
+
+                    <!-- Full Name -->
+                    <div class="learners-form-group">
+                        <label asp-for="DisplayName"
+                               class="learners-form-label">
+                            Full Name <span>*</span>
+                        </label>
+
+                        <div class="learners-input-wrapper">
+                            <i class="bi bi-person"></i>
+
+                            <input asp-for="DisplayName"
+                                   class="learners-form-control"
+                                   placeholder="Enter candidate's full name" />
+                        </div>
+
+                        <span asp-validation-for="DisplayName"
+                              class="learners-field-error">
+                        </span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="learners-form-group">
+                        <label asp-for="Email"
+                               class="learners-form-label">
+                            Email Address <span>*</span>
+                        </label>
+
+                        <div class="learners-input-wrapper">
+                            <i class="bi bi-envelope"></i>
+
+                            <input asp-for="Email"
+                                   class="learners-form-control"
+                                   placeholder="Enter candidate's email address" />
+                        </div>
+
+                        <span asp-validation-for="Email"
+                              class="learners-field-error">
+                        </span>
+                    </div>
+
+                    <!-- Cohort -->
+                    <div class="learners-form-group">
+                        <label asp-for="Cohort"
+                               class="learners-form-label">
+                            Cohort <span>*</span>
+                        </label>
+
+                        <div class="learners-input-wrapper">
+                            <i class="bi bi-people"></i>
+
+                            <input asp-for="Cohort"
+                                   class="learners-form-control"
+                                   placeholder="e.g. Deloitte 2026" />
+                        </div>
+
+                        <span asp-validation-for="Cohort"
+                              class="learners-field-error">
+                        </span>
+                    </div>
+
+                    <!-- Information Note -->
+                    <div class="learners-create-note">
+                        <i class="bi bi-info-circle"></i>
+
+                        <p>
+                            Login credentials will be generated automatically
+                            after creating the candidate. Make sure to save
+                            and securely share the temporary credentials.
+                        </p>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="learners-create-actions">
+
+                        <button type="submit"
+                                class="learners-create-submit">
+                            <i class="bi bi-person-check"></i>
+                            Create Candidate
+                        </button>
+
+                        <a asp-controller="Dashboard"
+                           asp-action="Index"
+                           class="learners-create-cancel">
+                            <i class="bi bi-x-circle"></i>
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
         </div>
+
     </div>
 </div>
+
+@section Styles {
+    <link rel="stylesheet"
+          href="~/css/learners-create.css"
+          asp-append-version="true" />
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

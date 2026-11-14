@@ -1,0 +1,392 @@
+
+/* =========================================
+   DASHBOARD PAGE
+========================================= */
+
+.dashboard-page {
+    color: #26352d;
+    padding-bottom: 30px;
+}
+
+.dashboard-heading h2 {
+    color: #244b36;
+    letter-spacing: -0.5px;
+}
+
+.dashboard-heading p {
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   SUMMARY CARDS
+========================================= */
+
+.dashboard-stat-card {
+    background: #ffffff;
+    border: 1px solid #e7ece6;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(35, 65, 45, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(35, 65, 45, 0.09);
+}
+
+.stat-label {
+    color: #78857b;
+    font-size: 0.88rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.stat-value {
+    color: #244b36;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-icon,
+.management-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #edf4ee;
+    color: #315f43;
+    font-size: 1.35rem;
+}
+
+.completed-icon {
+    background: #e7f3e9;
+    color: #26804b;
+}
+
+/* =========================================
+   DASHBOARD PANELS
+========================================= */
+
+.dashboard-panel {
+    background: #ffffff;
+    border: 1px solid #e7ece6;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(35, 65, 45, 0.05);
+    overflow: hidden;
+}
+
+.dashboard-panel-header {
+    background: #ffffff;
+    border-bottom: 1px solid #edf0eb;
+    padding: 20px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-panel-header h5 {
+    color: #244b36;
+    font-weight: 700;
+}
+
+.dashboard-panel .card-body {
+    padding: 22px;
+}
+
+.dashboard-panel-footer {
+    background: #ffffff;
+    border-top: 1px solid #edf0eb;
+    padding: 14px 22px;
+}
+
+.dashboard-count {
+    background: #edf4ee;
+    color: #315f43;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.dashboard-text-link {
+    color: #315f43;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.dashboard-text-link:hover {
+    color: #b28a35;
+}
+
+/* =========================================
+   QUICK VIEW - ACTIVITIES
+========================================= */
+
+.activity-quick-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-quick-item {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px 0;
+    border-bottom: 1px solid #edf0eb;
+}
+
+.activity-quick-item:first-child {
+    padding-top: 0;
+}
+
+.activity-quick-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.activity-quick-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f3e9;
+    color: #a18136;
+    border-radius: 10px;
+    font-size: 1.1rem;
+}
+
+.activity-quick-item h6 {
+    color: #304638;
+    font-weight: 600;
+    font-size: 0.92rem;
+}
+
+.activity-hours {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 42px;
+    color: #315f43;
+}
+
+.activity-hours strong {
+    font-size: 1rem;
+}
+
+.activity-hours span {
+    color: #849087;
+    font-size: 0.72rem;
+}
+
+/* =========================================
+   COHORT PROGRESS
+========================================= */
+
+.cohort-progress-item:last-child {
+    margin-bottom: 0 !important;
+}
+
+.cohort-progress-item h6 {
+    color: #304638;
+    font-weight: 600;
+}
+
+.cohort-percentage {
+    color: #315f43;
+    font-size: 0.95rem;
+}
+
+.dashboard-progress {
+    height: 9px;
+    background: #edf1eb;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.dashboard-progress .progress-bar {
+    background: linear-gradient(90deg, #315f43, #719b68);
+    border-radius: 20px;
+}
+
+/* =========================================
+   MANAGEMENT CARDS
+========================================= */
+
+.dashboard-management-card {
+    background: #ffffff;
+    border: 1px solid #e7ece6;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(35, 65, 45, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dashboard-management-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(35, 65, 45, 0.09);
+}
+
+.dashboard-management-card .card-body {
+    padding: 23px;
+}
+
+.dashboard-management-card h6 {
+    color: #244b36;
+}
+
+.dashboard-management-card p {
+    line-height: 1.6;
+    min-height: 48px;
+}
+
+.dashboard-primary-btn {
+    background: #315f43;
+    color: #ffffff;
+    border: 1px solid #315f43;
+    border-radius: 7px;
+    padding: 7px 13px;
+    font-weight: 500;
+}
+
+.dashboard-primary-btn:hover {
+    background: #244b36;
+    border-color: #244b36;
+    color: #ffffff;
+}
+
+.dashboard-outline-btn {
+    background: #ffffff;
+    color: #315f43;
+    border: 1px solid #315f43;
+    border-radius: 7px;
+    padding: 7px 13px;
+    font-weight: 500;
+}
+
+.dashboard-outline-btn:hover {
+    background: #edf4ee;
+    color: #244b36;
+}
+
+/* =========================================
+   EMPTY STATES
+========================================= */
+
+.dashboard-empty-state {
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #849087;
+    text-align: center;
+    gap: 10px;
+}
+
+.dashboard-empty-state i {
+    font-size: 2rem;
+    color: #a6b3a8;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+    .dashboard-page {
+        margin-top: 20px !important;
+    }
+
+    .dashboard-heading h2 {
+        font-size: 1.5rem;
+    }
+
+    .stat-value {
+        font-size: 1.7rem;
+    }
+
+    .dashboard-panel-header,
+    .dashboard-panel .card-body {
+        padding: 17px;
+    }
+
+    .dashboard-management-card .card-body {
+        padding: 19px;
+    }
+
+    .activity-quick-item {
+        gap: 10px;
+    }
+
+    .cohort-progress-item .text-muted {
+        font-size: 0.75rem;
+    }
+}
+
+/* =========================================
+   REMOVE DASHBOARD ICON CONTAINERS
+========================================= */
+
+.stat-icon,
+.management-icon,
+.activity-quick-icon {
+    display: none !important;
+}
+
+/* Remove the extra spacing left by management icons */
+.dashboard-management-card .management-icon + h6 {
+    margin-top: 0 !important;
+}
+
+
+/* =========================================
+   SCROLLABLE DASHBOARD PANELS
+========================================= */
+
+.dashboard-panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* Scrollable content area */
+.dashboard-scroll-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #a8b9aa #f0f3ef;
+}
+
+/* Webkit scrollbar styling */
+.dashboard-scroll-body::-webkit-scrollbar {
+    width: 7px;
+}
+
+.dashboard-scroll-body::-webkit-scrollbar-track {
+    background: #f0f3ef;
+    border-radius: 10px;
+}
+
+.dashboard-scroll-body::-webkit-scrollbar-thumb {
+    background: #a8b9aa;
+    border-radius: 10px;
+}
+
+.dashboard-scroll-body::-webkit-scrollbar-thumb:hover {
+    background: #315f43;
+}
+
+/* Keep header and footer stationary */
+.dashboard-panel-header,
+.dashboard-panel-footer {
+    flex-shrink: 0;
+}
+

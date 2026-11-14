@@ -1,175 +1,295 @@
+
 @model LearningTracker.Web.ViewModels.DashboardViewModel
 
 @{
     ViewData["Title"] = "Coordinator Dashboard";
 }
 
-<div class="container-fluid mt-4">
+<div class="container-fluid dashboard-page mt-4">
 
-    <div class="mb-4">
-        <h2>Coordinator Dashboard</h2>
-        <p class="text-muted">
-            Overview of learning activities and candidate progress.
+    <!-- Dashboard Heading -->
+    <div class="dashboard-heading mb-4">
+        <h2 class="fw-bold mb-1">Coordinator Dashboard</h2>
+        <p class="text-muted mb-0">
+            Monitor candidate learning progress and manage training activities.
         </p>
     </div>
 
+    <!-- Summary Cards -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+            <div class="card dashboard-stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stat-label">Total Candidates</p>
+                            <h2 class="stat-value">@Model.TotalLearners</h2>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card dashboard-stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stat-label">In Progress</p>
+                            <h2 class="stat-value">@Model.InProgressAssignments</h2>
+                        </div>
+                        <div class="stat-icon">
+                            <i class="bi bi-hourglass-split"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card dashboard-stat-card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="stat-label">Completed</p>
+                            <h2 class="stat-value">@Model.CompletedAssignments</h2>
+                        </div>
+                        <div class="stat-icon completed-icon">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Main Dashboard Content -->
     <div class="row g-4">
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h6 class="text-muted">Total Learners</h6>
-                    <h2 class="fw-bold">@Model.TotalLearners</h2>
+        <!-- Quick View -->
+        <div class="col-lg-5">
+            <div class="card dashboard-panel h-100">
+
+                <div class="card-header dashboard-panel-header">
+                    <div>
+                        <h5 class="mb-1">Quick View</h5>
+                        <p class="text-muted small mb-0">
+                            Available learning activities
+                        </p>
+                    </div>
+
+                    <span class="dashboard-count">
+                        @Model.Activities.Count
+                    </span>
                 </div>
+
+                <div class="card-body dashboard-scroll-body quick-view-scroll">
+
+                    @if (Model.Activities.Any())
+                    {
+                        <div class="activity-quick-list">
+
+                            @foreach (var activity in Model.Activities)
+                            {
+                                <div class="activity-quick-item">
+                                    <div class="activity-quick-icon">
+                                        <i class="bi bi-journal-bookmark"></i>
+                                    </div>
+
+                                    <div class="flex-grow-1">
+                                        <h6 class="mb-1">@activity.Title</h6>
+                                        <p class="text-muted small mb-0">
+                                            @activity.Topic
+                                        </p>
+                                    </div>
+
+                                    <div class="activity-hours">
+                                        <strong>@activity.PlannedHours</strong>
+                                        <span>hrs</span>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="dashboard-empty-state">
+                            <i class="bi bi-journal-x"></i>
+                            <p class="mb-0">No learning activities available yet.</p>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="card-footer dashboard-panel-footer">
+                    <a asp-controller="Activities"
+                       asp-action="Index"
+                       class="dashboard-text-link">
+                        Manage activities
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+
             </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h6 class="text-muted">Total Activities</h6>
-                    <h2 class="fw-bold">@Model.TotalActivities</h2>
+        <!-- Cohort Progress -->
+        <div class="col-lg-7">
+            <div class="card dashboard-panel h-100">
+
+                <div class="card-header dashboard-panel-header">
+                    <div>
+                        <h5 class="mb-1">Progress Overview</h5>
+                        <p class="text-muted small mb-0">
+                            Learning progress across cohorts
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h6 class="text-muted">Total Assignments</h6>
-                    <h2 class="fw-bold">@Model.TotalAssignments</h2>
-                </div>
-            </div>
-        </div>
+                <div class="card-body dashboard-scroll-body progress-overview-scroll">
 
-        <div class="col-md-6 col-xl-3">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h6 class="text-muted">Completed Assignments</h6>
-                    <h2 class="fw-bold text-success">
-                        @Model.CompletedAssignments
-                    </h2>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="card shadow-sm border-0 mt-4">
-        <div class="card-body">
-            <h5>Welcome, Coordinator!</h5>
-            <p class="text-muted mb-0">
-                Use the dashboard to manage learners, create activities,
-                assign training and monitor progress.
-            </p>
-        </div>
-    </div>
-
-    <div class="card shadow-sm border-0 mt-4">
-    <div class="card-body">
-        <h5 class="mb-3">Candidate Management</h5>
-
-        <div class="d-flex flex-wrap gap-2">
-
-            <a asp-controller="Learners"
-               asp-action="Index"
-               class="btn btn-primary">
-                <i class="bi bi-people"></i>
-                View Candidates
-            </a>
-
-            <a asp-controller="Learners"
-               asp-action="Create"
-               class="btn btn-outline-primary">
-                <i class="bi bi-person-plus"></i>
-                Add Candidate
-            </a>
-
-        </div>
-    </div>
-</div>
-<div class="card shadow-sm border-0 mt-4">
-    <div class="card-body">
-        <h5 class="mb-3">Activity Management</h5>
-
-        <a asp-controller="Activities"
-           asp-action="Index"
-           class="btn btn-primary">
-            <i class="bi bi-journal-text"></i>
-            View Activities
-        </a>
-    </div>
-</div>
-
-<div class="card shadow-sm border-0 mt-4">
-    <div class="card-body">
-        <h5 class="mb-3">Assignment Management</h5>
-
-        <p class="text-muted">
-            Assign learning activities to candidates.
-        </p>
-
-        <a asp-controller="Assignments"
-           asp-action="Create"
-           class="btn btn-primary">
-            <i class="bi bi-clipboard-check"></i>
-            Assign Activity
-        </a>
-    </div>
-</div>
-<div class="card shadow-sm mt-4">
-    <div class="card-header">
-        <h5 class="mb-0">Cohort Progress</h5>
-    </div>
-
-    <div class="card-body">
-        @if (Model.CohortProgress.Any())
-        {
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead>
-                        <tr>
-                            <th>Cohort</th>
-                            <th>Candidates</th>
-                            <th>Total Assignments</th>
-                            <th>Completed</th>
-                            <th>Progress</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
+                    @if (Model.CohortProgress.Any())
+                    {
                         @foreach (var cohort in Model.CohortProgress)
                         {
-                            <tr>
-                                <td>@cohort.CohortName</td>
-                                <td>@cohort.TotalLearners</td>
-                                <td>@cohort.TotalAssignments</td>
-                                <td>@cohort.CompletedAssignments</td>
-                                <td>
-                                    <div class="progress" style="height: 20px;">
-                                        <div class="progress-bar"
-                                             role="progressbar"
-                                             style="width: @cohort.CompletionPercentage%"
-                                             aria-valuenow="@cohort.CompletionPercentage"
-                                             aria-valuemin="0"
-                                             aria-valuemax="100">
-                                            @cohort.CompletionPercentage%
-                                        </div>
+                            <div class="cohort-progress-item mb-4">
+
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-1">@cohort.CohortName</h6>
+                                        <span class="text-muted small">
+                                            @cohort.TotalLearners candidates
+                                            ·
+                                            @cohort.CompletedAssignments / @cohort.TotalAssignments assignments completed
+                                        </span>
                                     </div>
-                                </td>
-                            </tr>
+
+                                    <strong class="cohort-percentage">
+                                        @cohort.CompletionPercentage%
+                                    </strong>
+                                </div>
+
+                                <div class="progress dashboard-progress">
+                                    <div class="progress-bar"
+                                         role="progressbar"
+                                         style="width: @cohort.CompletionPercentage%"
+                                         aria-valuenow="@cohort.CompletionPercentage"
+                                         aria-valuemin="0"
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+
+                            </div>
                         }
-                    </tbody>
-                </table>
+                    }
+                    else
+                    {
+                        <div class="dashboard-empty-state">
+                            <i class="bi bi-bar-chart"></i>
+                            <p class="mb-0">No cohort progress available yet.</p>
+                        </div>
+                    }
+
+                </div>
+
+                <div class="card-footer dashboard-panel-footer">
+                    <span class="text-muted small">
+                        Progress is calculated from saved assignment statuses.
+                    </span>
+                </div>
+
             </div>
-        }
-        else
-        {
-            <p class="text-muted mb-0">
-                No cohort progress available yet.
-            </p>
-        }
+        </div>
+
     </div>
-</div>
+
+    <!-- Management Shortcuts -->
+    <div class="mt-4 mb-4">
+
+        <div class="mb-3">
+            <h5 class="fw-bold mb-1">Management</h5>
+            <p class="text-muted small mb-0">
+                Manage candidates, learning activities and assignments.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card dashboard-management-card h-100">
+                    <div class="card-body">
+                        <div class="management-icon">
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                        <h6 class="fw-bold mt-3">Candidate Management</h6>
+                        <p class="text-muted small">
+                            Create candidate accounts and review their training progress.
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <a asp-controller="Learners"
+                               asp-action="Index"
+                               class="btn dashboard-primary-btn btn-sm">
+                                View Candidates
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card dashboard-management-card h-100">
+                    <div class="card-body">
+                        <div class="management-icon">
+                            <i class="bi bi-journal-text"></i>
+                        </div>
+
+                        <h6 class="fw-bold mt-3">Activity Management</h6>
+                        <p class="text-muted small">
+                            Create and update learning activities and planned hours.
+                        </p>
+
+                        <a asp-controller="Activities"
+                           asp-action="Index"
+                           class="btn dashboard-primary-btn btn-sm mt-3">
+                            View Activities
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card dashboard-management-card h-100">
+                    <div class="card-body">
+                        <div class="management-icon">
+                            <i class="bi bi-clipboard-check"></i>
+                        </div>
+
+                        <h6 class="fw-bold mt-3">Assignment Management</h6>
+                        <p class="text-muted small">
+                            Assign learning activities to candidates.
+                        </p>
+
+                        <a asp-controller="Assignments"
+                           asp-action="Create"
+                           class="btn dashboard-primary-btn btn-sm mt-3">
+                            Assign Activity
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+}

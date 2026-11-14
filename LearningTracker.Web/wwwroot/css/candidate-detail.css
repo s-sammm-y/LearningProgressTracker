@@ -1,0 +1,205 @@
+
+/* =========================================
+   CANDIDATE DETAILS PAGE
+========================================= */
+
+.candidate-details-page {
+    padding-bottom: 35px;
+    color: #26352d;
+}
+
+/* =========================================
+   PAGE HEADING
+========================================= */
+
+.candidate-page-title {
+    color: #244b36;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.candidate-details-heading p {
+    font-size: 0.95rem;
+}
+
+.candidate-details-heading .btn {
+    border-radius: 8px;
+    padding: 9px 16px;
+}
+
+/* =========================================
+   CANDIDATE PROFILE CARD
+========================================= */
+
+.candidate-profile-card {
+    background: #ffffff;
+    border: 1px solid #e5ebe5;
+    border-radius: 13px;
+    box-shadow: 0 3px 12px rgba(35, 65, 45, 0.06);
+}
+
+.candidate-profile-card .card-body {
+    padding: 25px;
+}
+
+.candidate-name {
+    color: #244b36;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.candidate-profile-card p {
+    color: #46554a;
+    font-size: 0.95rem;
+    margin-bottom: 9px;
+}
+
+.candidate-profile-card strong {
+    color: #263b2d;
+}
+
+/* =========================================
+   RESET PASSWORD BUTTON
+========================================= */
+
+.candidate-reset-btn {
+    background: #e6b52e;
+    color: #26352d;
+    border: 1px solid #e6b52e;
+    border-radius: 7px;
+    padding: 9px 17px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.candidate-reset-btn:hover {
+    background: #d5a21d;
+    border-color: #d5a21d;
+    color: #26352d;
+}
+
+/* =========================================
+   ASSIGNED TRAINING
+========================================= */
+
+.candidate-section-title {
+    color: #244b36;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.candidate-training-card {
+    background: #ffffff;
+    border: 1px solid #e5ebe5;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(35, 65, 45, 0.05);
+    overflow: hidden;
+}
+
+.candidate-training-table {
+    margin-bottom: 0;
+}
+
+.candidate-training-table thead th {
+    background: #edf3ed;
+    color: #244b36;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 15px 18px;
+    border-bottom: 1px solid #dce6dc;
+    white-space: nowrap;
+}
+
+.candidate-training-table tbody td {
+    padding: 15px 18px;
+    color: #39483e;
+    font-size: 0.92rem;
+    border-color: #edf0eb;
+}
+
+.candidate-training-table tbody tr:hover {
+    background: #f7faf7;
+}
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+
+.candidate-training-table .badge {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.candidate-training-table .bg-success {
+    background: #27804d !important;
+}
+
+.candidate-training-table .bg-primary {
+    background: #315f86 !important;
+}
+
+.candidate-training-table .bg-secondary {
+    background: #77847b !important;
+}
+
+/* =========================================
+   TEMPORARY PASSWORD ALERT
+========================================= */
+
+.temporary-password-alert {
+    border: 1px solid #ead79b;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.temporary-password-alert h5 {
+    color: #745a19;
+    font-weight: 700;
+}
+
+.temporary-password-alert code {
+    background: #ffffff;
+    border: 1px solid #eadfbf;
+    border-radius: 5px;
+    padding: 7px 11px;
+    color: #315f43;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+    .candidate-details-page {
+        margin-top: 20px !important;
+    }
+
+    .candidate-details-heading {
+        align-items: flex-start !important;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .candidate-page-title {
+        font-size: 1.5rem;
+    }
+
+    .candidate-profile-card .card-body {
+        padding: 19px;
+    }
+
+    .candidate-section-title {
+        font-size: 1.25rem;
+    }
+
+    .candidate-training-table thead th,
+    .candidate-training-table tbody td {
+        padding: 12px;
+        font-size: 0.83rem;
+    }
+}

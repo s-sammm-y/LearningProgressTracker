@@ -79,4 +79,12 @@ public class AssignmentRepository : IAssignmentRepository
             a => a.Status == AssignmentStatus.Completed,
             cancellationToken);
     }
+
+    public async Task<int> CountInProgressAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _context.Assignments.CountAsync(
+            a => a.Status == AssignmentStatus.InProgress,
+            cancellationToken);
+    }
 }

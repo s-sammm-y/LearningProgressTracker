@@ -29,4 +29,7 @@ public interface IAssignmentRepository
 
     Task<int> CountCompletedAsync(
         CancellationToken cancellationToken = default);
+
+    Task<int> CountInProgressAsync(
+        CancellationToken cancellationToken = default);
 }

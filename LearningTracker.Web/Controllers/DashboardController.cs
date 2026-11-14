@@ -16,25 +16,32 @@ public class DashboardController : Controller
     }
 
     public async Task<IActionResult> Index(
-        CancellationToken cancellationToken)
+    CancellationToken cancellationToken)
     {
-        var model = new DashboardViewModel
+        var viewModel = new DashboardViewModel
         {
-            TotalLearners =
-                await _dashboardService.GetTotalLearnersAsync(cancellationToken),
+            TotalLearners = await _dashboardService
+                .GetTotalLearnersAsync(cancellationToken),
 
-            TotalActivities =
-                await _dashboardService.GetTotalActivitiesAsync(cancellationToken),
+            TotalActivities = await _dashboardService
+                .GetTotalActivitiesAsync(cancellationToken),
 
-            TotalAssignments =
-                await _dashboardService.GetTotalAssignmentsAsync(cancellationToken),
+            TotalAssignments = await _dashboardService
+                .GetTotalAssignmentsAsync(cancellationToken),
 
-            CompletedAssignments =
-                await _dashboardService.GetCompletedAssignmentsAsync(cancellationToken),
+            CompletedAssignments = await _dashboardService
+                .GetCompletedAssignmentsAsync(cancellationToken),
 
-            CohortProgress = await _dashboardService.GetCohortProgressAsync()
+            InProgressAssignments = await _dashboardService
+                .GetInProgressAssignmentsAsync(cancellationToken),
+
+            Activities = await _dashboardService
+                .GetActivitiesAsync(cancellationToken),
+
+            CohortProgress = await _dashboardService
+                .GetCohortProgressAsync(cancellationToken)
         };
 
-        return View(model);
+        return View(viewModel);
     }
 }

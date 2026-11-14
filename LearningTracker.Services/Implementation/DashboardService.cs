@@ -1,5 +1,6 @@
 
 using LearningTracker.Models.DTOs;
+using LearningTracker.Models.Entities;
 using LearningTracker.Models.Enums;
 using LearningTracker.Repositories.Interfaces;
 using LearningTracker.Services.Interfaces;
@@ -79,5 +80,18 @@ public class DashboardService : IDashboardService
             })
             .OrderBy(p => p.CohortName)
             .ToList();
+    }
+
+    public async Task<int> GetInProgressAssignmentsAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _assignmentRepository.CountInProgressAsync(
+            cancellationToken);
+    }
+
+    public async Task<List<Activity>> GetActivitiesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        return await _activityRepository.GetAllAsync(cancellationToken);
     }
 }

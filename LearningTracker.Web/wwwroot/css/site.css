@@ -29,3 +29,70 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* =========================================
+   COORDINATOR SIDEBAR - LINK STYLING
+========================================= */
+
+.coordinator-shell .coordinator-sidebar .sidebar-navigation a.sidebar-link,
+.coordinator-shell .coordinator-sidebar .sidebar-navigation a.sidebar-link:link,
+.coordinator-shell .coordinator-sidebar .sidebar-navigation a.sidebar-link:visited {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+
+    color: #46564b !important;
+    text-decoration: none !important;
+
+    font-family: "Segoe UI", Inter, Arial, sans-serif;
+    font-size: 0.96rem;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+
+    padding: 12px 14px;
+    margin-bottom: 8px;
+
+    border-radius: 8px;
+    background: transparent;
+
+    transition: all 0.2s ease;
+}
+
+/* Sidebar hover */
+
+.coordinator-shell .coordinator-sidebar .sidebar-navigation a.sidebar-link:hover {
+    color: #164e32 !important;
+    background-color: #edf4ef;
+    text-decoration: none !important;
+    transform: translateX(3px);
+}
+
+/* Active sidebar link */
+
+.coordinator-shell .coordinator-sidebar .sidebar-navigation a.sidebar-link.active {
+    color: #164e32 !important;
+    background-color: #e8f1eb;
+    font-weight: 700;
+    border-left: 3px solid #164e32;
+    text-decoration: none !important;
+}
+
+/* Sidebar icons */
+
+.coordinator-shell .coordinator-sidebar .sidebar-navigation .sidebar-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 22px;
+    min-width: 22px;
+
+    color: #a17b2f;
+    font-size: 1.1rem;
+}
+
+/* Active icon */
+
+.coordinator-shell .coordinator-sidebar .sidebar-navigation a.active .sidebar-icon {
+    color: #164e32;
+}

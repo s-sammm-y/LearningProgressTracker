@@ -396,3 +396,196 @@ button.accept-policy {
         font-size: 1.2rem;
     }
 }
+
+
+
+/* ==============================
+   COORDINATOR SIDEBAR
+============================== */
+
+.coordinator-sidebar {
+    width: 245px;
+    min-width: 245px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border-right: 1px solid #e5e9e2;
+    padding: 32px 18px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Sidebar heading */
+
+.sidebar-heading {
+    color: #929b92;
+    font-size: 0.70rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 0 14px;
+    margin-bottom: 24px;
+}
+
+/* Navigation container */
+
+.sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+/* Navigation links */
+
+.coordinator-sidebar .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 13px 15px;
+    border-radius: 8px;
+
+    color: #526157;
+    background: transparent;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 0.94rem;
+    font-weight: 550;
+    letter-spacing: 0.1px;
+
+    text-decoration: none !important;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Hover effect */
+
+.coordinator-sidebar .sidebar-link:hover {
+    color: #164e32;
+    background: #f1f5f0;
+    text-decoration: none;
+    transform: translateX(3px);
+}
+
+/* Active navigation link */
+
+.coordinator-sidebar .sidebar-link.active {
+    color: #164e32;
+    background: #eaf2eb;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: inset 3px 0 0 #a17b2f;
+}
+
+/* Navigation icons */
+
+.sidebar-icon {
+    width: 23px;
+    min-width: 23px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #a17b2f;
+    font-size: 1.12rem;
+    line-height: 1;
+}
+
+.sidebar-link.active .sidebar-icon {
+    color: #164e32;
+}
+
+/* ==============================
+   RESPONSIVE SIDEBAR
+============================== */
+
+@media (max-width: 767px) {
+
+    .coordinator-sidebar {
+        width: 100%;
+        min-width: 0;
+        padding: 16px 14px;
+        border-right: none;
+        border-bottom: 1px solid #e5e9e2;
+    }
+
+    .sidebar-heading {
+        margin-bottom: 13px;
+    }
+
+    .sidebar-navigation {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 9px;
+        padding-bottom: 5px;
+    }
+
+    .coordinator-sidebar .sidebar-link {
+        flex-shrink: 0;
+        padding: 11px 13px;
+        font-size: 0.87rem;
+    }
+
+    .coordinator-sidebar .sidebar-link:hover {
+        transform: none;
+    }
+
+    .coordinator-main {
+        padding: 18px 12px;
+    }
+}
+
+/* =========================================
+   COORDINATOR LAYOUT
+========================================= */
+
+.coordinator-shell {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Sidebar */
+
+.coordinator-sidebar {
+    width: 245px;
+    min-width: 245px;
+    flex-shrink: 0;
+    align-self: stretch;
+}
+
+/* Main dashboard content */
+
+.coordinator-main {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 35px 40px;
+    overflow-x: auto;
+    background: #f7f8f5;
+}
+
+/* =========================================
+   RESPONSIVE COORDINATOR LAYOUT
+========================================= */
+
+@media (max-width: 767px) {
+
+    .coordinator-shell {
+        flex-direction: column;
+    }
+
+    .coordinator-sidebar {
+        width: 100%;
+        min-width: 0;
+        flex-shrink: 0;
+    }
+
+    .coordinator-main {
+        width: 100%;
+        padding: 22px 14px;
+    }
+}
+

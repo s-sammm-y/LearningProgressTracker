@@ -1,33 +1,46 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+
+    var showCoordinatorSidebar =
+        User.IsInRole("Coordinator") &&
+        new[] { "Dashboard", "Learners", "Activities", "Assignments" }
+            .Contains(currentController);
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LearningTracker.Web</title>
+
     <script type="importmap"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/LearningTracker.Web.styles.css" asp-append-version="true" />
+
     @await RenderSectionAsync("Styles", required: false)
 </head>
+
 <body>
-    
-    
+
     <header>
         <nav class="navbar navbar-expand-lg tracker-navbar">
             <div class="container-fluid px-4 px-lg-5">
 
-                <!-- Brand -->
                 <a class="navbar-brand tracker-brand"
-                asp-controller="Home"
-                asp-action="Index">
+                   asp-controller="Home"
+                   asp-action="Index">
+
                     <span class="brand-icon">L</span>
+
                     <span class="brand-name">
                         Learning<span class="brand-highlight">Tracker</span>
                     </span>
                 </a>
 
-                <!-- Mobile Toggle -->
                 <button class="navbar-toggler"
                         type="button"
                         data-bs-toggle="collapse"
@@ -35,37 +48,38 @@
                         aria-controls="trackerNavbar"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Navigation Links -->
                 <div class="collapse navbar-collapse" id="trackerNavbar">
+
                     <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
 
                         <li class="nav-item">
                             <a class="nav-link"
-                            asp-controller="Home"
-                            asp-action="Index">
+                               asp-controller="Home"
+                               asp-action="Index">
                                 Home
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link"
-                            asp-controller="Home"
-                            asp-action="Index"
-                            asp-fragment="features">
+                               asp-controller="Home"
+                               asp-action="Index"
+                               asp-fragment="features">
                                 Features
                             </a>
                         </li>
 
-                         @if (User.Identity?.IsAuthenticated == true)
+                        @if (User.Identity?.IsAuthenticated == true)
                         {
                             <li class="nav-item">
                                 <form asp-controller="Auth"
-                                    asp-action="Logout"
-                                    method="post"
-                                    class="d-inline">
+                                      asp-action="Logout"
+                                      method="post"
+                                      class="d-inline">
 
                                     <button type="submit"
                                             class="nav-link tracker-nav-button border-0">
@@ -79,16 +93,16 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link"
-                                asp-controller="Auth"
-                                asp-action="Login">
+                                   asp-controller="Auth"
+                                   asp-action="Login">
                                     Sign In
                                 </a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link tracker-nav-button"
-                                asp-controller="Auth"
-                                asp-action="Login">
+                                   asp-controller="Auth"
+                                   asp-action="Login">
                                     Get Started <span>→</span>
                                 </a>
                             </li>
@@ -101,17 +115,78 @@
         </nav>
     </header>
 
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
+    @if (showCoordinatorSidebar)
+    {
+        <div class="coordinator-shell">
+
+            <aside class="coordinator-sidebar">
+
+                <div class="sidebar-heading">
+                    COORDINATOR
+                </div>
+
+                <nav class="sidebar-navigation">
+
+                    <a asp-controller="Dashboard"
+                       asp-action="Index"
+                       class="sidebar-link @(currentController == "Dashboard" ? "active" : "")">
+
+                        <span class="sidebar-icon">▦</span>
+                        Dashboard
+                    </a>
+
+                    <a asp-controller="Learners"
+                       asp-action="Index"
+                       class="sidebar-link @(currentController == "Learners" ? "active" : "")">
+
+                        <span class="sidebar-icon">♙</span>
+                        Candidates
+                    </a>
+
+                    <a asp-controller="Activities"
+                       asp-action="Index"
+                       class="sidebar-link @(currentController == "Activities" ? "active" : "")">
+
+                        <span class="sidebar-icon">▤</span>
+                        Activities
+                    </a>
+
+                    <a asp-controller="Assignments"
+                       asp-action="Create"
+                       class="sidebar-link @(currentController == "Assignments" ? "active" : "")">
+
+                        <span class="sidebar-icon">☷</span>
+                        Assignments
+                    </a>
+
+                </nav>
+
+            </aside>
+
+            <main role="main" class="coordinator-main">
+                @RenderBody()
+            </main>
+
+        </div>
+    }
+    else
+    {
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    }
+
     <footer class="tracker-footer">
         <div class="container">
+
             <div class="tracker-footer-content">
 
                 <a class="tracker-footer-brand"
-                asp-controller="Home"
-                asp-action="Index">
+                   asp-controller="Home"
+                   asp-action="Index">
+
                     <span class="footer-brand-icon">L</span>
+
                     <span>
                         Learning<span class="footer-brand-highlight">Tracker</span>
                     </span>
@@ -122,18 +197,20 @@
                 </p>
 
                 <a class="tracker-footer-link"
-                asp-controller="Home"
-                asp-action="Privacy">
+                   asp-controller="Home"
+                   asp-action="Privacy">
                     Privacy Policy
-                    <i class="bi bi-arrow-up-right"></i>
                 </a>
 
             </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>

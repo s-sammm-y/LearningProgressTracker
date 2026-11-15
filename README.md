@@ -75,13 +75,15 @@ Update `DefaultConnection` in your local configuration file, such as
   },
   "Scheduler": {
     "HealthUrl": "http://localhost:5272/health"
-  }
+  },
+  "COORDINATOR_REGISTRATION_SECRET": "YOUR PASSWORD"
 }
 ```
 
 Replace the database username and password with your PostgreSQL
 credentials. Set `Scheduler:HealthUrl` to the health endpoint of the
 scheduler service you are using.
+Add coordinator registration secret for coordination creation
 
 The scheduler setting can also be supplied as an environment variable:
 

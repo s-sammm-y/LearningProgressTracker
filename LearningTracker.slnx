@@ -1,5 +1,4 @@
 <Solution>
-  <Project Path="HashGenerator/HashGenerator.csproj" />
   <Project Path="LearningTracker.Data/LearningTracker.Data.csproj" />
   <Project Path="LearningTracker.Models/LearningTracker.Models.csproj" />
   <Project Path="LearningTracker.Repositories/LearningTracker.Repositories.csproj" />

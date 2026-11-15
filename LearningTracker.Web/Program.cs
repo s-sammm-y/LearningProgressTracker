@@ -6,6 +6,7 @@ using LearningTracker.Services.Implementations;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.Authentication;
 using LearningTracker.Web.Authorization;
+using LearningTracker.Web.HealthService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,6 +49,10 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("CandidateOnly", policy =>
         policy.RequireRole("Candidate"));
 });
+//HealthService
+builder.Services.AddHttpClient();
+
+builder.Services.AddHostedService<ScheduledWorker>();
 
 //Services
 builder.Services.AddScoped<IAuthService, AuthService>();

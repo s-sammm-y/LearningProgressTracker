@@ -63,6 +63,7 @@ builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<SecurityStampValidationEvents>();
 builder.Services.AddScoped<RequirePasswordChangeFilter>();
+builder.Services.AddScoped<ICoordinatorService, CoordinatorService>();
 
 //Repository Injection
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();

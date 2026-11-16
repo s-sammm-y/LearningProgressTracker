@@ -4,7 +4,7 @@
 ========================================= */
 
 .my-training-page {
-    flex: 1 0 auto;   
+    flex: 1;
     background: #f5f5ef;
     color: #24352b;
 }

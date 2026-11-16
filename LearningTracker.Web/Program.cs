@@ -1,3 +1,5 @@
+using System.Net;
+using System.Threading.RateLimiting;
 using LearningTracker.Data;
 using LearningTracker.Models.Entities;
 using LearningTracker.Repositories.Implementations;
@@ -31,8 +33,6 @@ builder.Services.AddAuthentication("LearningTrackerCookie")
         options.EventsType = typeof(SecurityStampValidationEvents);
     });
 
-builder.Services.AddAuthorization();
-
 //DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(
@@ -51,8 +51,34 @@ builder.Services.AddAuthorization(options =>
 });
 //HealthService
 builder.Services.AddHttpClient();
-
 builder.Services.AddHostedService<ScheduledWorker>();
+
+// Global Rate Limiting
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.GlobalLimiter =
+        PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        {
+            var forwardedIp =
+                httpContext.Request.Headers["CF-Connecting-IP"].FirstOrDefault();
+
+            var ipAddress = IPAddress.TryParse(forwardedIp, out var clientIp)
+                ? clientIp.ToString()
+                : httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+            return RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: ipAddress,
+                factory: _ => new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 100,
+                    Window = TimeSpan.FromMinutes(1),
+                    QueueLimit = 0,
+                    AutoReplenishment = true
+                });
+        });
+});
 
 //Services
 builder.Services.AddScoped<IAuthService, AuthService>();
@@ -94,7 +120,10 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseRateLimiter();
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapStaticAssets();

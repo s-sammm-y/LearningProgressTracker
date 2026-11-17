@@ -19,4 +19,11 @@ public interface IActivityService
     Task<Activity?> GetActivityByIdAsync(
         Guid activityId,
         CancellationToken cancellationToken = default);
+
+    Task<byte[]> ExportActivitiesCsvAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<ActivityCsvImportResultDto> ImportActivitiesCsvAsync(
+        Stream csvStream,
+        CancellationToken cancellationToken = default);
 }

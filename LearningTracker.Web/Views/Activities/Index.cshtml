@@ -79,7 +79,6 @@
         else
         {
             <div class="activities-table-card">
-
                 <!-- Table Header -->
                 <div class="activities-table-heading">
 
@@ -90,15 +89,25 @@
 
                     <div class="activities-table-tools">
 
+                        <!-- Export CSV -->
+                        <a asp-controller="Activities"
+                        asp-action="ExportCsv"
+                        class="activities-export-button">
+
+                            <i class="bi bi-file-earmark-spreadsheet"></i>
+                            Export CSV
+
+                        </a>
+
                         <!-- Search -->
                         <div class="activities-search">
 
                             <i class="bi bi-search"></i>
 
                             <input type="search"
-                                   id="activitySearch"
-                                   placeholder="Search activities..."
-                                   aria-label="Search activities" />
+                                id="activitySearch"
+                                placeholder="Search activities..."
+                                aria-label="Search activities" />
 
                             <button type="button"
                                     id="clearActivitySearch"

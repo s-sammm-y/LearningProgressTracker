@@ -11,12 +11,70 @@
     <div class="activity-create-header mb-4">
         <div>
             <span class="activity-create-eyebrow">ACTIVITY MANAGEMENT</span>
+
             <h2 class="activity-create-title">Add Learning Activity</h2>
+
             <p class="activity-create-description">
                 Create a new activity for candidates.
             </p>
+
+            <!-- CSV Actions -->
+            <div class="activity-header-actions">
+
+                <!-- Download CSV Template -->
+                <a asp-controller="Activities"
+                   asp-action="DownloadTemplate"
+                   class="activity-template-button">
+                    <i class="bi bi-file-earmark-arrow-down"></i>
+                    Download CSV Template
+                </a>
+
+                <!-- Import CSV Form -->
+                <form asp-controller="Activities"
+                      asp-action="ImportCsv"
+                      method="post"
+                      enctype="multipart/form-data"
+                      class="activity-import-form">
+
+                    @Html.AntiForgeryToken()
+
+                    <input type="file"
+                           id="activityCsvFile"
+                           name="file"
+                           accept=".csv,text/csv"
+                           class="activity-import-input"
+                           required />
+
+                    <button type="submit"
+                            class="activity-import-button">
+                        <i class="bi bi-upload"></i>
+                        Import Activities
+                    </button>
+
+                </form>
+
+            </div>
         </div>
     </div>
+
+    <!-- Import Error Message -->
+    @if (TempData["ImportErrorMessage"] != null)
+    {
+        <div class="alert alert-danger mb-4"
+             style="white-space: pre-line;">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+            @TempData["ImportErrorMessage"]
+        </div>
+    }
+
+    <!-- Import Success Message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success mb-4">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            @TempData["SuccessMessage"]
+        </div>
+    }
 
     <!-- Create Activity Form -->
     <div class="activity-create-card">

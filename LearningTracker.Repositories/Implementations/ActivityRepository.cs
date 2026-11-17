@@ -51,4 +51,13 @@ public class ActivityRepository : IActivityRepository
     {
         return await _context.Activities.CountAsync(cancellationToken);
     }
+
+    public async Task AddRangeAsync(
+        IEnumerable<Activity> activities,
+        CancellationToken cancellationToken = default)
+    {
+        await _context.Activities.AddRangeAsync(
+            activities,
+            cancellationToken);
+    }
 }

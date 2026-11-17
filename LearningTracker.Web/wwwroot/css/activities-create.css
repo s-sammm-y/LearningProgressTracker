@@ -43,6 +43,49 @@
     margin-bottom: 0;
 }
 
+
+/* =========================================
+   CSV TEMPLATE DOWNLOAD BUTTON
+========================================= */
+
+.activity-template-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 10px 17px;
+
+    background: #ffffff;
+    color: #164e32;
+    border: 1px solid #164e32;
+    border-radius: 6px;
+
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: all 0.2s ease;
+}
+
+.activity-template-button:hover {
+    background: #164e32;
+    color: #ffffff;
+    border-color: #164e32;
+
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(22, 78, 50, 0.15);
+}
+
+.activity-template-button:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 95, 67, 0.2);
+}
+
+.activity-template-button i {
+    font-size: 1rem;
+}
+
 /* =========================================
    FORM CARD
 ========================================= */
@@ -238,3 +281,130 @@
         font-size: 0.92rem;
     }
 }
+
+
+/* =========================================
+   CSV HEADER ACTIONS
+========================================= */
+
+.activity-header-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+/* Download Template Button */
+
+.activity-template-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 17px;
+    background: #ffffff;
+    color: #164e32;
+    border: 1px solid #cbd9ce;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.activity-template-button:hover {
+    background: #edf3ed;
+    border-color: #164e32;
+    color: #164e32;
+    transform: translateY(-1px);
+}
+
+/* Import Form */
+
+.activity-import-form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* File Input */
+
+.activity-import-input {
+    max-width: 260px;
+    padding: 8px;
+    background: #ffffff;
+    color: #526157;
+    border: 1px solid #d5ded6;
+    border-radius: 7px;
+    font-size: 0.85rem;
+}
+
+.activity-import-input::file-selector-button {
+    margin-right: 10px;
+    padding: 6px 10px;
+    background: #edf3ed;
+    color: #164e32;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Import Button */
+
+.activity-import-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    background: #164e32;
+    color: #ffffff;
+    border: 1px solid #164e32;
+    border-radius: 7px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.activity-import-button:hover {
+    background: #236b46;
+    border-color: #236b46;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(22, 78, 50, 0.15);
+}
+
+.activity-import-button i,
+.activity-template-button i {
+    font-size: 1rem;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 767px) {
+
+    .activity-header-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .activity-import-form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .activity-template-button,
+    .activity-import-input,
+    .activity-import-button {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+

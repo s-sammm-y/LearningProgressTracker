@@ -259,6 +259,38 @@
 }
 
 /* =========================================
+   EXPORT CSV BUTTON
+========================================= */
+
+.activities-export-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #ffffff;
+    color: #164e32;
+    border: 1px solid #cbd9ce;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.activities-export-button:hover {
+    background: #164e32;
+    border-color: #164e32;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.activities-export-button i {
+    font-size: 1rem;
+}
+
+/* =========================================
    EMPTY STATE
 ========================================= */
 
@@ -414,6 +446,10 @@
     .activities-page {
         margin-top: 20px !important;
         padding-bottom: 25px;
+    }
+
+    .activities-export-button {
+        width: 100%;
     }
 
     .activities-header {

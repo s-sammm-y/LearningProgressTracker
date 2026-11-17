@@ -21,4 +21,8 @@ public interface IActivityRepository
 
     Task<int> CountAsync(
         CancellationToken cancellationToken = default);
+
+    Task AddRangeAsync(
+        IEnumerable<Activity> activities,
+        CancellationToken cancellationToken = default);
 }

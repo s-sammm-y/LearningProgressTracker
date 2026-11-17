@@ -1,4 +1,5 @@
 
+using System.Text;
 using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
@@ -123,5 +124,85 @@ public class ActivitiesController : Controller
             ModelState.AddModelError(string.Empty, ex.Message);
             return View(model);
         }
+    }
+
+
+    [HttpGet]
+    public IActionResult DownloadTemplate()
+    {
+        // Define the CSV column headers.
+        var csvContent = "Title,Topic,PlannedHours\r\n";
+
+        // Generate CSV bytes with UTF-8 BOM for Excel compatibility.
+        var encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: true);
+        var bytes = encoding.GetBytes(csvContent);
+
+        // Return the CSV file for download.
+        return File(
+            bytes,
+            "text/csv",
+            "activity_import_template.csv");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ExportCsv(
+        CancellationToken cancellationToken)
+    {
+        var csvBytes = await _activityService.ExportActivitiesCsvAsync(
+            cancellationToken);
+
+        return File(
+            csvBytes,
+            "text/csv",
+            $"activities_{DateTime.UtcNow:yyyyMMdd}.csv");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [RequestSizeLimit(5 * 1024 * 1024)]
+    public async Task<IActionResult> ImportCsv(
+        IFormFile? file,
+        CancellationToken cancellationToken)
+    {
+        // Check whether a file was uploaded.
+        if (file == null || file.Length == 0)
+        {
+            TempData["ImportErrorMessage"] =
+                "Please select a CSV file to upload.";
+
+            return RedirectToAction(nameof(Create));
+        }
+
+        // Validate the file extension.
+        if (!string.Equals(
+                Path.GetExtension(file.FileName),
+                ".csv",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            TempData["ImportErrorMessage"] =
+                "Only CSV files are allowed.";
+
+            return RedirectToAction(nameof(Create));
+        }
+
+        await using var stream = file.OpenReadStream();
+
+        var result = await _activityService.ImportActivitiesCsvAsync(
+            stream,
+            cancellationToken);
+
+        // If validation errors exist, don't redirect to Index.
+        if (result.Errors.Count > 0)
+        {
+            TempData["ImportErrorMessage"] =
+                string.Join(Environment.NewLine, result.Errors);
+
+            return RedirectToAction(nameof(Create));
+        }
+
+        TempData["SuccessMessage"] =
+            $"{result.ImportedCount} activities imported successfully.";
+
+        return RedirectToAction(nameof(Index));
     }
 }

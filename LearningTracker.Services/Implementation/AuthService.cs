@@ -1,4 +1,5 @@
 
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 using LearningTracker.Repositories.Interfaces;
 using LearningTracker.Services.Interfaces;
@@ -20,12 +21,11 @@ public class AuthService : IAuthService
     }
 
     public async Task<Account?> AuthenticateAsync(
-        string email,
-        string password,
+        AuthDto dto,
         CancellationToken cancellationToken = default)
     {
         // Normalize email before searching.
-        var normalizedEmail = email.Trim().ToUpperInvariant();
+        var normalizedEmail = dto.Email.Trim().ToUpperInvariant();
 
         var account = await _accountRepository.GetByNormalizedEmailAsync(
             normalizedEmail,
@@ -38,7 +38,7 @@ public class AuthService : IAuthService
         var verificationResult = _passwordHasher.VerifyHashedPassword(
             account,
             account.PasswordHash,
-            password);
+            dto.Password);
 
         if (verificationResult == PasswordVerificationResult.Failed)
             return null;
@@ -56,7 +56,7 @@ public class AuthService : IAuthService
         {
             account.PasswordHash = _passwordHasher.HashPassword(
                 account,
-                password);
+                dto.Password);
 
             await _accountRepository.SaveChangesAsync(cancellationToken);
         }
@@ -65,13 +65,11 @@ public class AuthService : IAuthService
     }
 
     public async Task<bool> ChangePasswordAsync(
-        Guid accountId,
-        string currentPassword,
-        string newPassword,
+        AuthDto dto,
         CancellationToken cancellationToken = default)
     {
         var account = await _accountRepository.GetByIdAsync(
-            accountId,
+            dto.AccountId,
             cancellationToken);
 
         if (account is null)
@@ -81,7 +79,7 @@ public class AuthService : IAuthService
         var verificationResult = _passwordHasher.VerifyHashedPassword(
             account,
             account.PasswordHash,
-            currentPassword);
+            dto.CurrentPassword);
 
         if (verificationResult == PasswordVerificationResult.Failed)
             return false;
@@ -97,7 +95,7 @@ public class AuthService : IAuthService
         // Hash and store the new password.
         account.PasswordHash = _passwordHasher.HashPassword(
             account,
-            newPassword);
+            dto.NewPassword);
 
         // Remove temporary-password restrictions.
         account.MustChangePassword = false;

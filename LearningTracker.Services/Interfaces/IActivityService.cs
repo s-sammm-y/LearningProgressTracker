@@ -1,4 +1,4 @@
-using System;
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 
 namespace LearningTracker.Services.Interfaces;
@@ -6,16 +6,11 @@ namespace LearningTracker.Services.Interfaces;
 public interface IActivityService
 {
     Task<Activity> CreateActivityAsync(
-        string title,
-        string topic,
-        decimal plannedHours,
+        ActivityDto dto,
         CancellationToken cancellationToken = default);
 
     Task<bool> UpdateActivityAsync(
-        Guid activityId,
-        string title,
-        string topic,
-        decimal plannedHours,
+        ActivityDto dto,
         CancellationToken cancellationToken = default);
 
     Task<List<Activity>> GetAllActivitiesAsync(

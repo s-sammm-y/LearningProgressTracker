@@ -1,4 +1,5 @@
 
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 using LearningTracker.Models.Enums;
 using LearningTracker.Repositories.Interfaces;
@@ -21,20 +22,19 @@ public class CoordinatorService : ICoordinatorService
     }
 
     public async Task<Account> CreateCoordinatorAsync(
-        string email,
-        string password,
+        CoordinatorDto dto,
         CancellationToken cancellationToken = default)
     {
         if (
-            string.IsNullOrWhiteSpace(email) ||
-            string.IsNullOrWhiteSpace(password))
+            string.IsNullOrWhiteSpace(dto.Email) ||
+            string.IsNullOrWhiteSpace(dto.Password))
         {
             throw new ArgumentException(
-                "Name, email and password are required.");
+                "Email and password are required.");
         }
 
         // Normalize email.
-        var normalizedEmail = email.Trim().ToUpperInvariant();
+        var normalizedEmail = dto.Email.Trim().ToUpperInvariant();
 
         // Check whether the email is already registered.
         var existingAccount =
@@ -62,7 +62,7 @@ public class CoordinatorService : ICoordinatorService
         // Hash the coordinator's password.
         account.PasswordHash = _passwordHasher.HashPassword(
             account,
-            password);
+            dto.Password);
 
         // Add account to the database.
         await _accountRepository.AddAsync(

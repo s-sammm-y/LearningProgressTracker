@@ -1,3 +1,5 @@
+
+using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -42,10 +44,15 @@ public class ActivitiesController : Controller
 
         try
         {
+            var dto = new ActivityDto
+            {
+                Title = model.Title,
+                Topic = model.Topic,
+                PlannedHours = model.PlannedHours
+            };
+
             await _activityService.CreateActivityAsync(
-                model.Title,
-                model.Topic,
-                model.PlannedHours,
+                dto,
                 cancellationToken);
 
             TempData["SuccessMessage"] = "Activity created successfully.";
@@ -92,11 +99,16 @@ public class ActivitiesController : Controller
 
         try
         {
+            var dto = new ActivityDto
+            {
+                ActivityId = model.Id,
+                Title = model.Title,
+                Topic = model.Topic,
+                PlannedHours = model.PlannedHours
+            };
+
             var updated = await _activityService.UpdateActivityAsync(
-                model.Id,
-                model.Title,
-                model.Topic,
-                model.PlannedHours,
+                dto,
                 cancellationToken);
 
             if (!updated)

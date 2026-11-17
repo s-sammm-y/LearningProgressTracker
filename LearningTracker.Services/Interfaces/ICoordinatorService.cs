@@ -1,3 +1,5 @@
+
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 
 namespace LearningTracker.Services.Interfaces;
@@ -5,7 +7,6 @@ namespace LearningTracker.Services.Interfaces;
 public interface ICoordinatorService
 {
     Task<Account> CreateCoordinatorAsync(
-        string email,
-        string password,
+        CoordinatorDto dto,
         CancellationToken cancellationToken = default);
 }

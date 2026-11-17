@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -50,16 +51,22 @@ public class MyTrainingController : Controller
         if (!Guid.TryParse(accountIdValue, out var accountId))
             return Forbid();
 
+        var dto = new AssignmentDto
+        {
+            AssignmentId = model.AssignmentId,
+            LearnerAccountId = accountId,
+            Status = model.Status
+        };
+
         var updated = await _assignmentService.UpdateStatusAsync(
-            model.AssignmentId,
-            accountId,
-            model.Status,
+            dto,
             cancellationToken);
 
         if (!updated)
             return NotFound();
 
-        TempData["SuccessMessage"] = "Training status updated successfully.";
+        TempData["SuccessMessage"] =
+            "Training status updated successfully.";
 
         return RedirectToAction(nameof(Index));
     }

@@ -1,5 +1,6 @@
 
 using System.Security.Claims;
+using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -32,9 +33,14 @@ public class AuthController : Controller
         if (!ModelState.IsValid)
             return View(model);
 
+        var dto = new AuthDto
+        {
+            Email = model.Email,
+            Password = model.Password
+        };
+
         var account = await _authService.AuthenticateAsync(
-            model.Email,
-            model.Password,
+            dto,
             cancellationToken);
 
         if (account is null)
@@ -107,10 +113,15 @@ public class AuthController : Controller
         if (!Guid.TryParse(accountIdClaim, out var accountId))
             return Challenge("LearningTrackerCookie");
 
+        var dto = new AuthDto
+        {
+            AccountId = accountId,
+            CurrentPassword = model.CurrentPassword,
+            NewPassword = model.NewPassword
+        };
+
         var success = await _authService.ChangePasswordAsync(
-            accountId,
-            model.CurrentPassword,
-            model.NewPassword,
+            dto,
             cancellationToken);
 
         if (!success)

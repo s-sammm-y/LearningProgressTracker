@@ -1,3 +1,4 @@
+using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -73,9 +74,14 @@ public class AssignmentsController : Controller
 
         try
         {
+            var dto = new AssignmentDto
+            {
+                LearnerId = model.LearnerId,
+                ActivityId = model.ActivityId
+            };
+
             await _assignmentService.AssignActivityAsync(
-                model.LearnerId,
-                model.ActivityId,
+                dto,
                 cancellationToken);
 
             TempData["SuccessMessage"] =

@@ -1,4 +1,4 @@
-using System;
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 
 namespace LearningTracker.Services.Interfaces;
@@ -6,13 +6,10 @@ namespace LearningTracker.Services.Interfaces;
 public interface IAuthService
 {
     Task<Account?> AuthenticateAsync(
-        string email,
-        string password,
+        AuthDto dto,
         CancellationToken cancellationToken = default);
 
     Task<bool> ChangePasswordAsync(
-        Guid accountId,
-        string currentPassword,
-        string newPassword,
+        AuthDto dto,
         CancellationToken cancellationToken = default);
 }

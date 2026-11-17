@@ -1,6 +1,7 @@
 
 using System.Security.Cryptography;
 using System.Text;
+using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -78,9 +79,14 @@ public class CoordinatorController : Controller
 
         try
         {
+            var dto = new CoordinatorDto
+            {
+                Email = model.Email,
+                Password = model.Password
+            };
+
             await _coordinatorService.CreateCoordinatorAsync(
-                model.Email,
-                model.Password,
+                dto,
                 cancellationToken);
 
             TempData["SuccessMessage"] =

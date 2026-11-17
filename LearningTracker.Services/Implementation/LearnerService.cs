@@ -1,4 +1,6 @@
+
 using System.Security.Cryptography;
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 using LearningTracker.Models.Enums;
 using LearningTracker.Repositories.Interfaces;
@@ -25,22 +27,20 @@ public class LearnerService : ILearnerService
 
     public async Task<(Learner Learner, string TemporaryPassword)>
         CreateLearnerAsync(
-            string displayName,
-            string email,
-            string cohort,
+            LearnerDto dto,
             CancellationToken cancellationToken = default)
     {
         // Basic input validation.
-        if (string.IsNullOrWhiteSpace(displayName) ||
-            string.IsNullOrWhiteSpace(email) ||
-            string.IsNullOrWhiteSpace(cohort))
+        if (string.IsNullOrWhiteSpace(dto.DisplayName) ||
+            string.IsNullOrWhiteSpace(dto.Email) ||
+            string.IsNullOrWhiteSpace(dto.Cohort))
         {
             throw new ArgumentException(
                 "Name, email and cohort are required.");
         }
 
         // Normalize email.
-        var normalizedEmail = email.Trim().ToUpperInvariant();
+        var normalizedEmail = dto.Email.Trim().ToUpperInvariant();
 
         // Check for duplicate email.
         var existingAccount =
@@ -77,8 +77,8 @@ public class LearnerService : ILearnerService
         var learner = new Learner
         {
             Id = Guid.NewGuid(),
-            DisplayName = displayName.Trim(),
-            Cohort = cohort.Trim(),
+            DisplayName = dto.DisplayName.Trim(),
+            Cohort = dto.Cohort.Trim(),
             AccountId = account.Id,
             Account = account
         };

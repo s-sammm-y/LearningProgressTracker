@@ -1,3 +1,4 @@
+using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -36,10 +37,15 @@ public class LearnersController : Controller
 
         try
         {
+            var dto = new LearnerDto
+            {
+                DisplayName = model.DisplayName,
+                Email = model.Email,
+                Cohort = model.Cohort
+            };
+
             var result = await _learnerService.CreateLearnerAsync(
-                model.DisplayName,
-                model.Email,
-                model.Cohort,
+                dto,
                 cancellationToken);
 
             TempData["LearnerName"] = result.Learner.DisplayName;

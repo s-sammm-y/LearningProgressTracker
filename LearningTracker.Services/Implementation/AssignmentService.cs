@@ -1,4 +1,5 @@
 
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 using LearningTracker.Models.Enums;
 using LearningTracker.Repositories.Interfaces;
@@ -23,27 +24,26 @@ public class AssignmentService : IAssignmentService
     }
 
     public async Task<Assignment> AssignActivityAsync(
-        Guid learnerId,
-        Guid activityId,
+        AssignmentDto dto,
         CancellationToken cancellationToken = default)
     {
         var learner = await _learnerRepository.GetByIdAsync(
-            learnerId,
+            dto.LearnerId,
             cancellationToken);
 
         if (learner is null)
             throw new InvalidOperationException("Learner not found.");
 
         var activity = await _activityRepository.GetByIdAsync(
-            activityId,
+            dto.ActivityId,
             cancellationToken);
 
         if (activity is null)
             throw new InvalidOperationException("Activity not found.");
 
         var alreadyAssigned = await _assignmentRepository.ExistsAsync(
-            learnerId,
-            activityId,
+            dto.LearnerId,
+            dto.ActivityId,
             cancellationToken);
 
         if (alreadyAssigned)
@@ -53,8 +53,8 @@ public class AssignmentService : IAssignmentService
         var assignment = new Assignment
         {
             Id = Guid.NewGuid(),
-            LearnerId = learnerId,
-            ActivityId = activityId,
+            LearnerId = dto.LearnerId,
+            ActivityId = dto.ActivityId,
             Status = AssignmentStatus.NotStarted
         };
 
@@ -69,29 +69,27 @@ public class AssignmentService : IAssignmentService
     }
 
     public async Task<bool> UpdateStatusAsync(
-        Guid assignmentId,
-        Guid learnerAccountId,
-        AssignmentStatus status,
+        AssignmentDto dto,
         CancellationToken cancellationToken = default)
     {
-        if (!Enum.IsDefined(typeof(AssignmentStatus), status))
+        if (!Enum.IsDefined(typeof(AssignmentStatus), dto.Status))
             throw new ArgumentException("Invalid assignment status.");
 
         var learner = await _learnerRepository.GetByAccountIdAsync(
-            learnerAccountId,
+            dto.LearnerAccountId,
             cancellationToken);
 
         if (learner is null)
             return false;
 
         var assignment = await _assignmentRepository.GetByIdAsync(
-            assignmentId,
+            dto.AssignmentId,
             cancellationToken);
 
         if (assignment is null || assignment.LearnerId != learner.Id)
             return false;
 
-        assignment.Status = status;
+        assignment.Status = dto.Status;
 
         await _assignmentRepository.SaveChangesAsync(
             cancellationToken);

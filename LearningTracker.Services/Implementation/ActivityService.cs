@@ -1,4 +1,5 @@
 
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
 using LearningTracker.Repositories.Interfaces;
 using LearningTracker.Services.Interfaces;
@@ -15,19 +16,20 @@ public class ActivityService : IActivityService
     }
 
     public async Task<Activity> CreateActivityAsync(
-        string title,
-        string topic,
-        decimal plannedHours,
+        ActivityDto dto,
         CancellationToken cancellationToken = default)
     {
-        ValidateActivityDetails(title, topic, plannedHours);
+        ValidateActivityDetails(
+            dto.Title,
+            dto.Topic,
+            dto.PlannedHours);
 
         var activity = new Activity
         {
             Id = Guid.NewGuid(),
-            Title = title.Trim(),
-            Topic = topic.Trim(),
-            PlannedHours = plannedHours
+            Title = dto.Title.Trim(),
+            Topic = dto.Topic.Trim(),
+            PlannedHours = dto.PlannedHours
         };
 
         await _activityRepository.AddAsync(
@@ -41,24 +43,24 @@ public class ActivityService : IActivityService
     }
 
     public async Task<bool> UpdateActivityAsync(
-        Guid activityId,
-        string title,
-        string topic,
-        decimal plannedHours,
+        ActivityDto dto,
         CancellationToken cancellationToken = default)
     {
-        ValidateActivityDetails(title, topic, plannedHours);
+        ValidateActivityDetails(
+            dto.Title,
+            dto.Topic,
+            dto.PlannedHours);
 
         var activity = await _activityRepository.GetByIdAsync(
-            activityId,
+            dto.ActivityId,
             cancellationToken);
 
         if (activity is null)
             return false;
 
-        activity.Title = title.Trim();
-        activity.Topic = topic.Trim();
-        activity.PlannedHours = plannedHours;
+        activity.Title = dto.Title.Trim();
+        activity.Topic = dto.Topic.Trim();
+        activity.PlannedHours = dto.PlannedHours;
 
         await _activityRepository.SaveChangesAsync(
             cancellationToken);

@@ -1,20 +1,16 @@
-
+using LearningTracker.Models.DTOs;
 using LearningTracker.Models.Entities;
-using LearningTracker.Models.Enums;
 
 namespace LearningTracker.Services.Interfaces;
 
 public interface IAssignmentService
 {
     Task<Assignment> AssignActivityAsync(
-        Guid learnerId,
-        Guid activityId,
+        AssignmentDto dto,
         CancellationToken cancellationToken = default);
 
     Task<bool> UpdateStatusAsync(
-        Guid assignmentId,
-        Guid learnerAccountId,
-        AssignmentStatus status,
+        AssignmentDto dto,
         CancellationToken cancellationToken = default);
 
     Task<List<Assignment>> GetAssignmentsForLearnerAsync(

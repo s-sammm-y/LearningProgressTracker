@@ -5,26 +5,19 @@ namespace LearningTracker.Repositories.Interfaces;
 public interface ILearnerRepository
 {
     Task<Learner?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default);
+        Guid id);
 
     Task<Learner?> GetByAccountIdAsync(
-        Guid accountId,
-        CancellationToken cancellationToken = default);
+        Guid accountId);
 
-    Task<List<Learner>> GetAllAsync(
-        CancellationToken cancellationToken = default);
+    Task<List<Learner>> GetAllAsync();
 
     Task AddAsync(
-        Learner learner,
-        CancellationToken cancellationToken = default);
+        Learner learner);
 
-    Task SaveChangesAsync(
-        CancellationToken cancellationToken = default);
+    Task SaveChangesAsync();
 
-    Task<int> CountAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> CountAsync();
 
-    Task<List<Learner>> GetAllWithAssignmentsAsync(
-        CancellationToken cancellationToken = default);
+    Task<List<Learner>> GetAllWithAssignmentsAsync();
 }

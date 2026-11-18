@@ -1,3 +1,4 @@
+
 using System.Globalization;
 using CsvHelper;
 using LearningTracker.Models.DTOs;
@@ -17,9 +18,7 @@ public class ActivityService : IActivityService
         _activityRepository = activityRepository;
     }
 
-    public async Task<Activity> CreateActivityAsync(
-        ActivityDto dto,
-        CancellationToken cancellationToken = default)
+    public async Task<Activity> CreateActivityAsync(ActivityDto dto)
     {
         ValidateActivityDetails(
             dto.Title,
@@ -34,19 +33,14 @@ public class ActivityService : IActivityService
             PlannedHours = dto.PlannedHours
         };
 
-        await _activityRepository.AddAsync(
-            activity,
-            cancellationToken);
+        await _activityRepository.AddAsync(activity);
 
-        await _activityRepository.SaveChangesAsync(
-            cancellationToken);
+        await _activityRepository.SaveChangesAsync();
 
         return activity;
     }
 
-    public async Task<bool> UpdateActivityAsync(
-        ActivityDto dto,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateActivityAsync(ActivityDto dto)
     {
         ValidateActivityDetails(
             dto.Title,
@@ -54,8 +48,7 @@ public class ActivityService : IActivityService
             dto.PlannedHours);
 
         var activity = await _activityRepository.GetByIdAsync(
-            dto.ActivityId,
-            cancellationToken);
+            dto.ActivityId);
 
         if (activity is null)
             return false;
@@ -64,8 +57,7 @@ public class ActivityService : IActivityService
         activity.Topic = dto.Topic.Trim();
         activity.PlannedHours = dto.PlannedHours;
 
-        await _activityRepository.SaveChangesAsync(
-            cancellationToken);
+        await _activityRepository.SaveChangesAsync();
 
         return true;
     }
@@ -86,27 +78,20 @@ public class ActivityService : IActivityService
                 "Planned hours must be greater than zero.");
     }
 
-    public async Task<List<Activity>> GetAllActivitiesAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<Activity>> GetAllActivitiesAsync()
     {
-        return await _activityRepository.GetAllAsync(
-            cancellationToken);
+        return await _activityRepository.GetAllAsync();
     }
 
-    public async Task<Activity?> GetActivityByIdAsync(
-        Guid activityId,
-        CancellationToken cancellationToken = default)
+    public async Task<Activity?> GetActivityByIdAsync(Guid activityId)
     {
-        return await _activityRepository.GetByIdAsync(
-            activityId,
-            cancellationToken);
+        return await _activityRepository.GetByIdAsync(activityId);
     }
 
-    public async Task<byte[]> ExportActivitiesCsvAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<byte[]> ExportActivitiesCsvAsync()
     {
-        List<Activity> activities = await _activityRepository.GetAllAsync(
-            cancellationToken);
+        List<Activity> activities =
+            await _activityRepository.GetAllAsync();
 
         return CsvExporter.Export<Activity>(
             activities,
@@ -117,10 +102,8 @@ public class ActivityService : IActivityService
         );
     }
 
-    
-public async Task<ActivityCsvImportResultDto> ImportActivitiesCsvAsync(
-    Stream csvStream,
-    CancellationToken cancellationToken = default)
+    public async Task<ActivityCsvImportResultDto> ImportActivitiesCsvAsync(
+        Stream csvStream)
     {
         var result = new ActivityCsvImportResultDto();
         var activities = new List<Activity>();
@@ -138,7 +121,7 @@ public async Task<ActivityCsvImportResultDto> ImportActivitiesCsvAsync(
 
         try
         {
-            await csv.ReadHeaderAsync(cancellationToken);
+            await csv.ReadHeaderAsync();
 
             if (csv.Headers.Count == 0)
             {
@@ -172,10 +155,8 @@ public async Task<ActivityCsvImportResultDto> ImportActivitiesCsvAsync(
                 return result;
             }
 
-            while (await csv.ReadAsync(cancellationToken))
+            while (await csv.ReadAsync())
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
                 var rowNumber = csv.RowNumber;
 
                 var title = csv.GetString(titleIndex).Trim();
@@ -251,16 +232,12 @@ public async Task<ActivityCsvImportResultDto> ImportActivitiesCsvAsync(
         if (result.Errors.Count > 0)
             return result;
 
-        await _activityRepository.AddRangeAsync(
-            activities,
-            cancellationToken);
+        await _activityRepository.AddRangeAsync(activities);
 
-        await _activityRepository.SaveChangesAsync(
-            cancellationToken);
+        await _activityRepository.SaveChangesAsync();
 
         result.ImportedCount = activities.Count;
 
         return result;
     }
-
 }

@@ -33,8 +33,7 @@ public class SecurityStampValidationEvents : CookieAuthenticationEvents
         }
 
         var account = await _accountRepository.GetByIdAsync(
-            accountId,
-            context.HttpContext.RequestAborted);
+            accountId);
 
         if (account is null ||
             account.SecurityStamp != securityStampClaim)

@@ -6,23 +6,17 @@ namespace LearningTracker.Repositories.Interfaces;
 public interface IActivityRepository
 {
     Task<Activity?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default);
+        Guid id);
 
-    Task<List<Activity>> GetAllAsync(
-        CancellationToken cancellationToken = default);
+    Task<List<Activity>> GetAllAsync();
 
     Task AddAsync(
-        Activity activity,
-        CancellationToken cancellationToken = default);
+        Activity activity);
 
-    Task SaveChangesAsync(
-        CancellationToken cancellationToken = default);
+    Task SaveChangesAsync();
 
-    Task<int> CountAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> CountAsync();
 
     Task AddRangeAsync(
-        IEnumerable<Activity> activities,
-        CancellationToken cancellationToken = default);
+        IEnumerable<Activity> activities);
 }

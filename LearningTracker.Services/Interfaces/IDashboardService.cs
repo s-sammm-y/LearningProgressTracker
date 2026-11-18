@@ -6,24 +6,17 @@ namespace LearningTracker.Services.Interfaces;
 
 public interface IDashboardService
 {
-    Task<int> GetTotalLearnersAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> GetTotalLearnersAsync();
 
-    Task<int> GetTotalActivitiesAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> GetTotalActivitiesAsync();
 
-    Task<int> GetTotalAssignmentsAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> GetTotalAssignmentsAsync();
 
-    Task<int> GetCompletedAssignmentsAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> GetCompletedAssignmentsAsync();
 
-    Task<List<CohortProgress>> GetCohortProgressAsync(
-        CancellationToken cancellationToken = default);
+    Task<List<CohortProgress>> GetCohortProgressAsync();
     
-    Task<int> GetInProgressAssignmentsAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> GetInProgressAssignmentsAsync();
 
-    Task<List<Activity>> GetActivitiesAsync(
-        CancellationToken cancellationToken = default);
+    Task<List<Activity>> GetActivitiesAsync();
 }

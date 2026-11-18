@@ -1,3 +1,4 @@
+
 using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
@@ -29,8 +30,7 @@ public class LearnersController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(
-        CreateLearnerViewModel model,
-        CancellationToken cancellationToken)
+        CreateLearnerViewModel model)
     {
         if (!ModelState.IsValid)
             return View(model);
@@ -44,9 +44,7 @@ public class LearnersController : Controller
                 Cohort = model.Cohort
             };
 
-            var result = await _learnerService.CreateLearnerAsync(
-                dto,
-                cancellationToken);
+            var result = await _learnerService.CreateLearnerAsync(dto);
 
             TempData["LearnerName"] = result.Learner.DisplayName;
             TempData["LearnerEmail"] = model.Email;
@@ -76,30 +74,24 @@ public class LearnersController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Index()
     {
-        var learners = await _learnerService.GetAllLearnersAsync(
-            cancellationToken);
+        var learners = await _learnerService.GetAllLearnersAsync();
 
         return View(learners);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Details(
-        Guid id,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Details(Guid id)
     {
-        var learner = await _learnerService.GetLearnerByIdAsync(
-            id,
-            cancellationToken);
+        var learner = await _learnerService.GetLearnerByIdAsync(id);
 
         if (learner == null)
             return NotFound();
 
-        var assignments = await _assignmentService.GetAssignmentsForLearnerAsync(
-            learner.AccountId,
-            cancellationToken);
+        var assignments =
+            await _assignmentService.GetAssignmentsForLearnerAsync(
+                learner.AccountId);
 
         var viewModel = new LearnerDetailsViewModel
         {
@@ -112,14 +104,10 @@ public class LearnersController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ResetPassword(
-        Guid id,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ResetPassword(Guid id)
     {
         var temporaryPassword =
-            await _learnerService.ResetTemporaryPasswordAsync(
-                id,
-                cancellationToken);
+            await _learnerService.ResetTemporaryPasswordAsync(id);
 
         if (temporaryPassword == null)
             return NotFound();

@@ -35,8 +35,7 @@ public class CoordinatorController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(
-        CoordinatorRegistrationViewModel model,
-        CancellationToken cancellationToken)
+        CoordinatorRegistrationViewModel model)
     {
         if (User.Identity?.IsAuthenticated == true)
             return RedirectToAction("Index", "Home");
@@ -85,9 +84,7 @@ public class CoordinatorController : Controller
                 Password = model.Password
             };
 
-            await _coordinatorService.CreateCoordinatorAsync(
-                dto,
-                cancellationToken);
+            await _coordinatorService.CreateCoordinatorAsync(dto);
 
             TempData["SuccessMessage"] =
                 "Coordinator account created successfully. You can now sign in.";

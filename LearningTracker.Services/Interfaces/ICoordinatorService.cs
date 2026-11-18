@@ -7,6 +7,5 @@ namespace LearningTracker.Services.Interfaces;
 public interface ICoordinatorService
 {
     Task<Account> CreateCoordinatorAsync(
-        CoordinatorDto dto,
-        CancellationToken cancellationToken = default);
+        CoordinatorDto dto);
 }

@@ -5,31 +5,23 @@ namespace LearningTracker.Repositories.Interfaces;
 public interface IAssignmentRepository
 {
     Task<Assignment?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default);
+        Guid id);
 
     Task<List<Assignment>> GetByLearnerIdAsync(
-        Guid learnerId,
-        CancellationToken cancellationToken = default);
+        Guid learnerId);
 
     Task<bool> ExistsAsync(
         Guid learnerId,
-        Guid activityId,
-        CancellationToken cancellationToken = default);
+        Guid activityId);
 
     Task AddAsync(
-        Assignment assignment,
-        CancellationToken cancellationToken = default);
+        Assignment assignment);
 
-    Task SaveChangesAsync(
-        CancellationToken cancellationToken = default);
+    Task SaveChangesAsync();
 
-    Task<int> CountAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> CountAsync();
 
-    Task<int> CountCompletedAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> CountCompletedAsync();
 
-    Task<int> CountInProgressAsync(
-        CancellationToken cancellationToken = default);
+    Task<int> CountInProgressAsync();
 }

@@ -20,16 +20,13 @@ public class AuthService : IAuthService
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<Account?> AuthenticateAsync(
-        AuthDto dto,
-        CancellationToken cancellationToken = default)
+    public async Task<Account?> AuthenticateAsync(AuthDto dto)
     {
         // Normalize email before searching.
         var normalizedEmail = dto.Email.Trim().ToUpperInvariant();
 
         var account = await _accountRepository.GetByNormalizedEmailAsync(
-            normalizedEmail,
-            cancellationToken);
+            normalizedEmail);
 
         if (account is null)
             return null;
@@ -58,19 +55,16 @@ public class AuthService : IAuthService
                 account,
                 dto.Password);
 
-            await _accountRepository.SaveChangesAsync(cancellationToken);
+            await _accountRepository.SaveChangesAsync();
         }
 
         return account;
     }
 
-    public async Task<bool> ChangePasswordAsync(
-        AuthDto dto,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> ChangePasswordAsync(AuthDto dto)
     {
         var account = await _accountRepository.GetByIdAsync(
-            dto.AccountId,
-            cancellationToken);
+            dto.AccountId);
 
         if (account is null)
             return false;
@@ -104,7 +98,7 @@ public class AuthService : IAuthService
         // Invalidate existing authentication sessions.
         account.SecurityStamp = Guid.NewGuid().ToString();
 
-        await _accountRepository.SaveChangesAsync(cancellationToken);
+        await _accountRepository.SaveChangesAsync();
 
         return true;
     }

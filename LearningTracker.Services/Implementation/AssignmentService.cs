@@ -23,28 +23,23 @@ public class AssignmentService : IAssignmentService
         _activityRepository = activityRepository;
     }
 
-    public async Task<Assignment> AssignActivityAsync(
-        AssignmentDto dto,
-        CancellationToken cancellationToken = default)
+    public async Task<Assignment> AssignActivityAsync(AssignmentDto dto)
     {
         var learner = await _learnerRepository.GetByIdAsync(
-            dto.LearnerId,
-            cancellationToken);
+            dto.LearnerId);
 
         if (learner is null)
             throw new InvalidOperationException("Learner not found.");
 
         var activity = await _activityRepository.GetByIdAsync(
-            dto.ActivityId,
-            cancellationToken);
+            dto.ActivityId);
 
         if (activity is null)
             throw new InvalidOperationException("Activity not found.");
 
         var alreadyAssigned = await _assignmentRepository.ExistsAsync(
             dto.LearnerId,
-            dto.ActivityId,
-            cancellationToken);
+            dto.ActivityId);
 
         if (alreadyAssigned)
             throw new InvalidOperationException(
@@ -58,58 +53,47 @@ public class AssignmentService : IAssignmentService
             Status = AssignmentStatus.NotStarted
         };
 
-        await _assignmentRepository.AddAsync(
-            assignment,
-            cancellationToken);
+        await _assignmentRepository.AddAsync(assignment);
 
-        await _assignmentRepository.SaveChangesAsync(
-            cancellationToken);
+        await _assignmentRepository.SaveChangesAsync();
 
         return assignment;
     }
 
-    public async Task<bool> UpdateStatusAsync(
-        AssignmentDto dto,
-        CancellationToken cancellationToken = default)
+    public async Task<bool> UpdateStatusAsync(AssignmentDto dto)
     {
         if (!Enum.IsDefined(typeof(AssignmentStatus), dto.Status))
             throw new ArgumentException("Invalid assignment status.");
 
         var learner = await _learnerRepository.GetByAccountIdAsync(
-            dto.LearnerAccountId,
-            cancellationToken);
+            dto.LearnerAccountId);
 
         if (learner is null)
             return false;
 
         var assignment = await _assignmentRepository.GetByIdAsync(
-            dto.AssignmentId,
-            cancellationToken);
+            dto.AssignmentId);
 
         if (assignment is null || assignment.LearnerId != learner.Id)
             return false;
 
         assignment.Status = dto.Status;
 
-        await _assignmentRepository.SaveChangesAsync(
-            cancellationToken);
+        await _assignmentRepository.SaveChangesAsync();
 
         return true;
     }
 
     public async Task<List<Assignment>> GetAssignmentsForLearnerAsync(
-        Guid learnerAccountId,
-        CancellationToken cancellationToken = default)
+        Guid learnerAccountId)
     {
         var learner = await _learnerRepository.GetByAccountIdAsync(
-            learnerAccountId,
-            cancellationToken);
+            learnerAccountId);
 
         if (learner is null)
             return new List<Assignment>();
 
         return await _assignmentRepository.GetByLearnerIdAsync(
-            learner.Id,
-            cancellationToken);
+            learner.Id);
     }
 }

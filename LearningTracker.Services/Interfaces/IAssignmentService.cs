@@ -6,14 +6,11 @@ namespace LearningTracker.Services.Interfaces;
 public interface IAssignmentService
 {
     Task<Assignment> AssignActivityAsync(
-        AssignmentDto dto,
-        CancellationToken cancellationToken = default);
+        AssignmentDto dto);
 
     Task<bool> UpdateStatusAsync(
-        AssignmentDto dto,
-        CancellationToken cancellationToken = default);
+        AssignmentDto dto);
 
     Task<List<Assignment>> GetAssignmentsForLearnerAsync(
-        Guid learnerAccountId,
-        CancellationToken cancellationToken = default);
+        Guid learnerAccountId);
 }

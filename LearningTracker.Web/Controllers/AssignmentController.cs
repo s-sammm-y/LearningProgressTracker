@@ -1,3 +1,4 @@
+
 using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
@@ -25,25 +26,21 @@ public class AssignmentsController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Create(
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Create()
     {
         var model = new AssignActivityViewModel();
 
-        await PopulateOptionsAsync(model, cancellationToken);
+        await PopulateOptionsAsync(model);
 
         return View(model);
     }
 
     private async Task PopulateOptionsAsync(
-        AssignActivityViewModel model,
-        CancellationToken cancellationToken)
+        AssignActivityViewModel model)
     {
-        var learners = await _learnerService.GetAllLearnersAsync(
-            cancellationToken);
+        var learners = await _learnerService.GetAllLearnersAsync();
 
-        var activities = await _activityService.GetAllActivitiesAsync(
-            cancellationToken);
+        var activities = await _activityService.GetAllActivitiesAsync();
 
         model.Learners = learners.Select(learner =>
             new SelectListItem
@@ -63,12 +60,11 @@ public class AssignmentsController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(
-        AssignActivityViewModel model,
-        CancellationToken cancellationToken)
+        AssignActivityViewModel model)
     {
         if (!ModelState.IsValid)
         {
-            await PopulateOptionsAsync(model, cancellationToken);
+            await PopulateOptionsAsync(model);
             return View(model);
         }
 
@@ -80,9 +76,7 @@ public class AssignmentsController : Controller
                 ActivityId = model.ActivityId
             };
 
-            await _assignmentService.AssignActivityAsync(
-                dto,
-                cancellationToken);
+            await _assignmentService.AssignActivityAsync(dto);
 
             TempData["SuccessMessage"] =
                 "Activity assigned successfully.";
@@ -93,14 +87,14 @@ public class AssignmentsController : Controller
         {
             ModelState.AddModelError(string.Empty, ex.Message);
 
-            await PopulateOptionsAsync(model, cancellationToken);
+            await PopulateOptionsAsync(model);
             return View(model);
         }
         catch (ArgumentException ex)
         {
             ModelState.AddModelError(string.Empty, ex.Message);
 
-            await PopulateOptionsAsync(model, cancellationToken);
+            await PopulateOptionsAsync(model);
             return View(model);
         }
     }

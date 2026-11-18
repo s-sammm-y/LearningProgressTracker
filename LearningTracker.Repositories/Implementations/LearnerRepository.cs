@@ -15,62 +15,48 @@ public class LearnerRepository : ILearnerRepository
         _context = context;
     }
 
-    public async Task<Learner?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
+    public async Task<Learner?> GetByIdAsync(Guid id)
     {
         return await _context.Learners
             .Include(l => l.Account)
-            .FirstOrDefaultAsync(
-                l => l.Id == id,
-                cancellationToken);
+            .FirstOrDefaultAsync(l => l.Id == id);
     }
 
-    public async Task<Learner?> GetByAccountIdAsync(
-        Guid accountId,
-        CancellationToken cancellationToken = default)
+    public async Task<Learner?> GetByAccountIdAsync(Guid accountId)
     {
         return await _context.Learners
-            .FirstOrDefaultAsync(
-                l => l.AccountId == accountId,
-                cancellationToken);
+            .FirstOrDefaultAsync(l => l.AccountId == accountId);
     }
 
-    public async Task<List<Learner>> GetAllAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<Learner>> GetAllAsync()
     {
         return await _context.Learners
             .Include(l => l.Account)
             .OrderBy(l => l.DisplayName)
-            .ToListAsync(cancellationToken);
+            .ToListAsync();
     }
 
-    public async Task AddAsync(
-        Learner learner,
-        CancellationToken cancellationToken = default)
+    public async Task AddAsync(Learner learner)
     {
-        await _context.Learners.AddAsync(learner, cancellationToken);
+        await _context.Learners.AddAsync(learner);
     }
 
-    public async Task SaveChangesAsync(
-        CancellationToken cancellationToken = default)
+    public async Task SaveChangesAsync()
     {
-        await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync();
     }
 
-    public async Task<int> CountAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> CountAsync()
     {
-        return await _context.Learners.CountAsync(cancellationToken);
+        return await _context.Learners.CountAsync();
     }
 
-    public async Task<List<Learner>> GetAllWithAssignmentsAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<Learner>> GetAllWithAssignmentsAsync()
     {
         return await _context.Learners
             .Include(l => l.Assignments)
             .OrderBy(l => l.Cohort)
             .ThenBy(l => l.DisplayName)
-            .ToListAsync(cancellationToken);
+            .ToListAsync();
     }
 }

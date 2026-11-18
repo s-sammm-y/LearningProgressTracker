@@ -22,8 +22,7 @@ public class CoordinatorService : ICoordinatorService
     }
 
     public async Task<Account> CreateCoordinatorAsync(
-        CoordinatorDto dto,
-        CancellationToken cancellationToken = default)
+        CoordinatorDto dto)
     {
         if (
             string.IsNullOrWhiteSpace(dto.Email) ||
@@ -39,8 +38,7 @@ public class CoordinatorService : ICoordinatorService
         // Check whether the email is already registered.
         var existingAccount =
             await _accountRepository.GetByNormalizedEmailAsync(
-                normalizedEmail,
-                cancellationToken);
+                normalizedEmail);
 
         if (existingAccount is not null)
         {
@@ -65,12 +63,9 @@ public class CoordinatorService : ICoordinatorService
             dto.Password);
 
         // Add account to the database.
-        await _accountRepository.AddAsync(
-            account,
-            cancellationToken);
+        await _accountRepository.AddAsync(account);
 
-        await _accountRepository.SaveChangesAsync(
-            cancellationToken);
+        await _accountRepository.SaveChangesAsync();
 
         return account;
     }

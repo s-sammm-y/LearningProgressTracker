@@ -15,49 +15,36 @@ public class ActivityRepository : IActivityRepository
         _context = context;
     }
 
-    public async Task<Activity?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
+    public async Task<Activity?> GetByIdAsync(Guid id)
     {
         return await _context.Activities
-            .FirstOrDefaultAsync(
-                a => a.Id == id,
-                cancellationToken);
+            .FirstOrDefaultAsync(a => a.Id == id);
     }
 
-    public async Task<List<Activity>> GetAllAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<Activity>> GetAllAsync()
     {
         return await _context.Activities
             .OrderBy(a => a.Title)
-            .ToListAsync(cancellationToken);
+            .ToListAsync();
     }
 
-    public async Task AddAsync(
-        Activity activity,
-        CancellationToken cancellationToken = default)
+    public async Task AddAsync(Activity activity)
     {
-        await _context.Activities.AddAsync(activity, cancellationToken);
+        await _context.Activities.AddAsync(activity);
     }
 
-    public async Task SaveChangesAsync(
-        CancellationToken cancellationToken = default)
+    public async Task SaveChangesAsync()
     {
-        await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync();
     }
 
-    public async Task<int> CountAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> CountAsync()
     {
-        return await _context.Activities.CountAsync(cancellationToken);
+        return await _context.Activities.CountAsync();
     }
 
-    public async Task AddRangeAsync(
-        IEnumerable<Activity> activities,
-        CancellationToken cancellationToken = default)
+    public async Task AddRangeAsync(IEnumerable<Activity> activities)
     {
-        await _context.Activities.AddRangeAsync(
-            activities,
-            cancellationToken);
+        await _context.Activities.AddRangeAsync(activities);
     }
 }

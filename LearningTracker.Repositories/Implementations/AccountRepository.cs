@@ -15,36 +15,26 @@ public class AccountRepository : IAccountRepository
         _context = context;
     }
 
-    public async Task<Account?> GetByNormalizedEmailAsync(
-        string normalizedEmail,
-        CancellationToken cancellationToken = default)
+    public async Task<Account?> GetByNormalizedEmailAsync(string normalizedEmail)
     {
         return await _context.Accounts
             .FirstOrDefaultAsync(
-                a => a.NormalizedEmail == normalizedEmail,
-                cancellationToken);
+                a => a.NormalizedEmail == normalizedEmail);
     }
 
-    public async Task<Account?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default)
+    public async Task<Account?> GetByIdAsync(Guid id)
     {
         return await _context.Accounts
-            .FirstOrDefaultAsync(
-                a => a.Id == id,
-                cancellationToken);
+            .FirstOrDefaultAsync(a => a.Id == id);
     }
 
-    public async Task AddAsync(
-        Account account,
-        CancellationToken cancellationToken = default)
+    public async Task AddAsync(Account account)
     {
-        await _context.Accounts.AddAsync(account, cancellationToken);
+        await _context.Accounts.AddAsync(account);
     }
 
-    public async Task SaveChangesAsync(
-        CancellationToken cancellationToken = default)
+    public async Task SaveChangesAsync()
     {
-        await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync();
     }
 }

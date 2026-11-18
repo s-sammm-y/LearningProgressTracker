@@ -26,9 +26,7 @@ public class LearnerService : ILearnerService
     }
 
     public async Task<(Learner Learner, string TemporaryPassword)>
-        CreateLearnerAsync(
-            LearnerDto dto,
-            CancellationToken cancellationToken = default)
+        CreateLearnerAsync(LearnerDto dto)
     {
         // Basic input validation.
         if (string.IsNullOrWhiteSpace(dto.DisplayName) ||
@@ -45,8 +43,7 @@ public class LearnerService : ILearnerService
         // Check for duplicate email.
         var existingAccount =
             await _accountRepository.GetByNormalizedEmailAsync(
-                normalizedEmail,
-                cancellationToken);
+                normalizedEmail);
 
         if (existingAccount is not null)
         {
@@ -84,17 +81,12 @@ public class LearnerService : ILearnerService
         };
 
         // Add both entities to the same DbContext.
-        await _accountRepository.AddAsync(
-            account,
-            cancellationToken);
+        await _accountRepository.AddAsync(account);
 
-        await _learnerRepository.AddAsync(
-            learner,
-            cancellationToken);
+        await _learnerRepository.AddAsync(learner);
 
         // Save both entities together.
-        await _accountRepository.SaveChangesAsync(
-            cancellationToken);
+        await _accountRepository.SaveChangesAsync();
 
         // Return plaintext password only once.
         return (learner, temporaryPassword);
@@ -137,30 +129,20 @@ public class LearnerService : ILearnerService
         return new string(passwordCharacters.ToArray());
     }
 
-    public async Task<List<Learner>> GetAllLearnersAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<Learner>> GetAllLearnersAsync()
     {
-        return await _learnerRepository.GetAllAsync(
-            cancellationToken);
+        return await _learnerRepository.GetAllAsync();
     }
 
-    public async Task<Learner?> GetLearnerByIdAsync(
-        Guid learnerId,
-        CancellationToken cancellationToken = default)
+    public async Task<Learner?> GetLearnerByIdAsync(Guid learnerId)
     {
-        return await _learnerRepository.GetByIdAsync(
-            learnerId,
-            cancellationToken);
+        return await _learnerRepository.GetByIdAsync(learnerId);
     }
 
-    public async Task<string?> ResetTemporaryPasswordAsync(
-        Guid learnerId,
-        CancellationToken cancellationToken = default)
+    public async Task<string?> ResetTemporaryPasswordAsync(Guid learnerId)
     {
         // Find the candidate and their associated account.
-        var learner = await _learnerRepository.GetByIdAsync(
-            learnerId,
-            cancellationToken);
+        var learner = await _learnerRepository.GetByIdAsync(learnerId);
 
         if (learner == null || learner.Account == null)
             return null;
@@ -184,8 +166,7 @@ public class LearnerService : ILearnerService
         account.SecurityStamp = Guid.NewGuid().ToString();
 
         // Save the changes.
-        await _accountRepository.SaveChangesAsync(
-            cancellationToken);
+        await _accountRepository.SaveChangesAsync();
 
         // Return the temporary password for one-time handover.
         return temporaryPassword;

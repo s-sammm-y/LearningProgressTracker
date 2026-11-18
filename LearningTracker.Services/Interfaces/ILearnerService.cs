@@ -6,17 +6,13 @@ namespace LearningTracker.Services.Interfaces;
 public interface ILearnerService
 {
     Task<(Learner Learner, string TemporaryPassword)> CreateLearnerAsync(
-        LearnerDto dto,
-        CancellationToken cancellationToken = default);
+        LearnerDto dto);
 
-    Task<List<Learner>> GetAllLearnersAsync(
-        CancellationToken cancellationToken = default);
+    Task<List<Learner>> GetAllLearnersAsync();
 
     Task<Learner?> GetLearnerByIdAsync(
-        Guid learnerId,
-        CancellationToken cancellationToken = default);
+        Guid learnerId);
 
     Task<string?> ResetTemporaryPasswordAsync(
-        Guid learnerId,
-        CancellationToken cancellationToken = default);
+        Guid learnerId);
 }

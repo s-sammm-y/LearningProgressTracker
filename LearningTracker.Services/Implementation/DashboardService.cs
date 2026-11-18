@@ -23,36 +23,30 @@ public class DashboardService : IDashboardService
         _assignmentRepository = assignmentRepository;
     }
 
-    public async Task<int> GetTotalLearnersAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> GetTotalLearnersAsync()
     {
-        return await _learnerRepository.CountAsync(cancellationToken);
+        return await _learnerRepository.CountAsync();
     }
 
-    public async Task<int> GetTotalActivitiesAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> GetTotalActivitiesAsync()
     {
-        return await _activityRepository.CountAsync(cancellationToken);
+        return await _activityRepository.CountAsync();
     }
 
-    public async Task<int> GetTotalAssignmentsAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> GetTotalAssignmentsAsync()
     {
-        return await _assignmentRepository.CountAsync(cancellationToken);
+        return await _assignmentRepository.CountAsync();
     }
 
-    public async Task<int> GetCompletedAssignmentsAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> GetCompletedAssignmentsAsync()
     {
-        return await _assignmentRepository.CountCompletedAsync(
-            cancellationToken);
+        return await _assignmentRepository.CountCompletedAsync();
     }
 
-    public async Task<List<CohortProgress>> GetCohortProgressAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<CohortProgress>> GetCohortProgressAsync()
     {
         var learners = await _learnerRepository
-            .GetAllWithAssignmentsAsync(cancellationToken);
+            .GetAllWithAssignmentsAsync();
 
         return learners
             .GroupBy(l => l.Cohort)
@@ -82,16 +76,13 @@ public class DashboardService : IDashboardService
             .ToList();
     }
 
-    public async Task<int> GetInProgressAssignmentsAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<int> GetInProgressAssignmentsAsync()
     {
-        return await _assignmentRepository.CountInProgressAsync(
-            cancellationToken);
+        return await _assignmentRepository.CountInProgressAsync();
     }
 
-    public async Task<List<Activity>> GetActivitiesAsync(
-        CancellationToken cancellationToken = default)
+    public async Task<List<Activity>> GetActivitiesAsync()
     {
-        return await _activityRepository.GetAllAsync(cancellationToken);
+        return await _activityRepository.GetAllAsync();
     }
 }

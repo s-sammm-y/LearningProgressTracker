@@ -6,10 +6,8 @@ namespace LearningTracker.Services.Interfaces;
 public interface IAuthService
 {
     Task<Account?> AuthenticateAsync(
-        AuthDto dto,
-        CancellationToken cancellationToken = default);
+        AuthDto dto);
 
     Task<bool> ChangePasswordAsync(
-        AuthDto dto,
-        CancellationToken cancellationToken = default);
+        AuthDto dto);
 }

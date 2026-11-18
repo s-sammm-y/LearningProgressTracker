@@ -19,11 +19,9 @@ public class ActivitiesController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Index()
     {
-        var activities = await _activityService.GetAllActivitiesAsync(
-            cancellationToken);
+        var activities = await _activityService.GetAllActivitiesAsync();
 
         return View(activities);
     }
@@ -37,8 +35,7 @@ public class ActivitiesController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(
-        CreateActivityViewModel model,
-        CancellationToken cancellationToken)
+        CreateActivityViewModel model)
     {
         if (!ModelState.IsValid)
             return View(model);
@@ -52,9 +49,7 @@ public class ActivitiesController : Controller
                 PlannedHours = model.PlannedHours
             };
 
-            await _activityService.CreateActivityAsync(
-                dto,
-                cancellationToken);
+            await _activityService.CreateActivityAsync(dto);
 
             TempData["SuccessMessage"] = "Activity created successfully.";
 
@@ -68,12 +63,9 @@ public class ActivitiesController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Edit(
-        Guid id,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Edit(Guid id)
     {
-        var activity = await _activityService.GetActivityByIdAsync(
-            id, cancellationToken);
+        var activity = await _activityService.GetActivityByIdAsync(id);
 
         if (activity == null)
             return NotFound();
@@ -92,8 +84,7 @@ public class ActivitiesController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(
-        EditActivityViewModel model,
-        CancellationToken cancellationToken)
+        EditActivityViewModel model)
     {
         if (!ModelState.IsValid)
             return View(model);
@@ -108,9 +99,7 @@ public class ActivitiesController : Controller
                 PlannedHours = model.PlannedHours
             };
 
-            var updated = await _activityService.UpdateActivityAsync(
-                dto,
-                cancellationToken);
+            var updated = await _activityService.UpdateActivityAsync(dto);
 
             if (!updated)
                 return NotFound();
@@ -125,7 +114,6 @@ public class ActivitiesController : Controller
             return View(model);
         }
     }
-
 
     [HttpGet]
     public IActionResult DownloadTemplate()
@@ -145,11 +133,9 @@ public class ActivitiesController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> ExportCsv(
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ExportCsv()
     {
-        var csvBytes = await _activityService.ExportActivitiesCsvAsync(
-            cancellationToken);
+        var csvBytes = await _activityService.ExportActivitiesCsvAsync();
 
         return File(
             csvBytes,
@@ -160,9 +146,7 @@ public class ActivitiesController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     [RequestSizeLimit(5 * 1024 * 1024)]
-    public async Task<IActionResult> ImportCsv(
-        IFormFile? file,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> ImportCsv(IFormFile? file)
     {
         // Check whether a file was uploaded.
         if (file == null || file.Length == 0)
@@ -187,9 +171,7 @@ public class ActivitiesController : Controller
 
         await using var stream = file.OpenReadStream();
 
-        var result = await _activityService.ImportActivitiesCsvAsync(
-            stream,
-            cancellationToken);
+        var result = await _activityService.ImportActivitiesCsvAsync(stream);
 
         // If validation errors exist, don't redirect to Index.
         if (result.Errors.Count > 0)

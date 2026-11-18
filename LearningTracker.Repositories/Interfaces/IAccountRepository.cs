@@ -6,17 +6,13 @@ namespace LearningTracker.Repositories.Interfaces;
 public interface IAccountRepository
 {
     Task<Account?> GetByNormalizedEmailAsync(
-        string normalizedEmail,
-        CancellationToken cancellationToken = default);
+        string normalizedEmail);
 
     Task<Account?> GetByIdAsync(
-        Guid id,
-        CancellationToken cancellationToken = default);
+        Guid id);
 
     Task AddAsync(
-        Account account,
-        CancellationToken cancellationToken = default);
+        Account account);
 
-    Task SaveChangesAsync(
-        CancellationToken cancellationToken = default);
+    Task SaveChangesAsync();
 }

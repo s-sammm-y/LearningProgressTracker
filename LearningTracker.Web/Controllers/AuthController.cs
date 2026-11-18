@@ -27,8 +27,7 @@ public class AuthController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(
-        LoginViewModel model,
-        CancellationToken cancellationToken)
+        LoginViewModel model)
     {
         if (!ModelState.IsValid)
             return View(model);
@@ -39,9 +38,7 @@ public class AuthController : Controller
             Password = model.Password
         };
 
-        var account = await _authService.AuthenticateAsync(
-            dto,
-            cancellationToken);
+        var account = await _authService.AuthenticateAsync(dto);
 
         if (account is null)
         {
@@ -101,8 +98,7 @@ public class AuthController : Controller
     [Microsoft.AspNetCore.Authorization.Authorize]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ChangePassword(
-        ChangePasswordViewModel model,
-        CancellationToken cancellationToken)
+        ChangePasswordViewModel model)
     {
         if (!ModelState.IsValid)
             return View(model);
@@ -120,9 +116,7 @@ public class AuthController : Controller
             NewPassword = model.NewPassword
         };
 
-        var success = await _authService.ChangePasswordAsync(
-            dto,
-            cancellationToken);
+        var success = await _authService.ChangePasswordAsync(dto);
 
         if (!success)
         {

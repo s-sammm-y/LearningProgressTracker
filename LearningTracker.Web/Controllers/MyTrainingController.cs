@@ -1,3 +1,4 @@
+
 using System.Security.Claims;
 using LearningTracker.Models.DTOs;
 using LearningTracker.Services.Interfaces;
@@ -19,8 +20,7 @@ public class MyTrainingController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Index()
     {
         var accountIdValue = User.FindFirstValue(
             ClaimTypes.NameIdentifier);
@@ -30,8 +30,7 @@ public class MyTrainingController : Controller
 
         var assignments =
             await _assignmentService.GetAssignmentsForLearnerAsync(
-                accountId,
-                cancellationToken);
+                accountId);
 
         return View(assignments);
     }
@@ -39,8 +38,7 @@ public class MyTrainingController : Controller
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> UpdateStatus(
-        UpdateAssignmentStatusViewModel model,
-        CancellationToken cancellationToken)
+        UpdateAssignmentStatusViewModel model)
     {
         if (!ModelState.IsValid)
             return RedirectToAction(nameof(Index));
@@ -58,9 +56,7 @@ public class MyTrainingController : Controller
             Status = model.Status
         };
 
-        var updated = await _assignmentService.UpdateStatusAsync(
-            dto,
-            cancellationToken);
+        var updated = await _assignmentService.UpdateStatusAsync(dto);
 
         if (!updated)
             return NotFound();

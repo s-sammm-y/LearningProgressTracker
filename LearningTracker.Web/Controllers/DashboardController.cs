@@ -1,3 +1,4 @@
+
 using LearningTracker.Services.Interfaces;
 using LearningTracker.Web.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -15,31 +16,30 @@ public class DashboardController : Controller
         _dashboardService = dashboardService;
     }
 
-    public async Task<IActionResult> Index(
-    CancellationToken cancellationToken)
+    public async Task<IActionResult> Index()
     {
         var viewModel = new DashboardViewModel
         {
             TotalLearners = await _dashboardService
-                .GetTotalLearnersAsync(cancellationToken),
+                .GetTotalLearnersAsync(),
 
             TotalActivities = await _dashboardService
-                .GetTotalActivitiesAsync(cancellationToken),
+                .GetTotalActivitiesAsync(),
 
             TotalAssignments = await _dashboardService
-                .GetTotalAssignmentsAsync(cancellationToken),
+                .GetTotalAssignmentsAsync(),
 
             CompletedAssignments = await _dashboardService
-                .GetCompletedAssignmentsAsync(cancellationToken),
+                .GetCompletedAssignmentsAsync(),
 
             InProgressAssignments = await _dashboardService
-                .GetInProgressAssignmentsAsync(cancellationToken),
+                .GetInProgressAssignmentsAsync(),
 
             Activities = await _dashboardService
-                .GetActivitiesAsync(cancellationToken),
+                .GetActivitiesAsync(),
 
             CohortProgress = await _dashboardService
-                .GetCohortProgressAsync(cancellationToken)
+                .GetCohortProgressAsync()
         };
 
         return View(viewModel);
